@@ -2,24 +2,34 @@ from django.db import models
 from django.conf import settings
 # from django.contrib.auth import get_user_model
 # Create your models here.
+# id를 data 가공에서 pk로 전부 바꿔주었음.
+
 class Actor(models.Model):
-    id=models.IntegerField(unique=True,primary_key=True)
+    # id=models.IntegerField(unique=True,primary_key=True)
     name=models.CharField(max_length=100)
     profile_path=models.TextField(null=True)
     gender=models.IntegerField()
 
+
+    # likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_actors', blank=True)
+
 class Director(models.Model):
-    id=models.IntegerField(unique=True,primary_key=True)
+    # id=models.IntegerField(unique=True,primary_key=True)
     name=models.CharField(max_length=100)
     profile_path=models.TextField(null=True)
+   
+   
+    # likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
 
 class Genre(models.Model):
-    id=models.IntegerField(unique=True,primary_key=True)
+    # id=models.IntegerField(unique=True,primary_key=True)
     name=models.CharField(max_length=100)
-
+   
+   
+    # likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
 
 class Movie(models.Model):
-    id=models.IntegerField(unique=True,primary_key=True)
+    # id=models.IntegerField(unique=True,primary_key=True)
     title=models.CharField(max_length=100)
     overview=models.TextField()
     release_date=models.DateField(null=True, blank=True)
@@ -32,12 +42,14 @@ class Movie(models.Model):
     genres=models.ManyToManyField(Genre, related_name='movies')
 
 
+    # likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies', blank=True)
+
 
 class Review(models.Model):
     title=models.CharField(max_length=100)
     content=models.TextField()
-    movie=models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
-    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='my_reviews', null=True, blank=True)  
+    movie=models.ForeignKey(Movie, on_delete=models.CASCADE,related_name='reviews')
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='my_reviews')  
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
@@ -46,10 +58,11 @@ class Review(models.Model):
 class Ratings(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
+    score = models.IntegerField()
 
 class Comment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    review = models.ForeignKey(Review, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
     comment=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

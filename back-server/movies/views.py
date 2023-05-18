@@ -2,35 +2,59 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, get_list_or_404
 from .models import Movie,Review,Actor
-from .serializers import MovieSerializer,ActorSerializer,ReviewSerializer,MovieDetailSerializer,ActorDetailSerializer,ReviewDetailSerializer
+from .serializers import MovieSerializer,ActorSerializer,ReviewSerializer,MovieDetailSerializer,ActorDetailSerializer,ReviewDetailSerializer,MovieSearchSerializer
 # Create your views here.
 
+
+
+
+# 영화 전체 리스트를 요청하는 것.
+@api_view(['GET'])
+def movie_list(request):
+    # movies=Movie.objects.all()
+    movies=get_list_or_404(Movie)
+    serializer=MovieSerializer(movies,many=True)
+    return Response(serializer.data)
+
+# 영화를 제목으로 검색
+@api_view(['GET'])
+def movie_title_search_detail(request,movie_title):
+    movies=Movie.objects.filter(title__contains=movie_title) 
+    if not movies.exists():
+    # 조건에 맞는 데이터가 없는 경우 빈 데이터를 반환하도록 처리
+        movies_data = []
+    else:
+    # movies를 serializer를 사용하여 직렬화
+        serializer = MovieSearchSerializer(movies, many=True)
+        movies_data = serializer.data
+    return Response(movies_data)
+
+# 무비 디테일 (리뷰, 배우, 감독, 포함)
+@api_view(['GET'])
+def movie_detail(request,movie_pk):
+    movie=get_object_or_404(Movie,id=movie_pk)
+    serializer=MovieDetailSerializer(movie)
+    return Response(serializer.data)
+
+# 전체 배우리스트 요청 (이름, 사진)
 @api_view(['GET'])
 def actor_list(request):
-    actors=Actor.objects.all()
+    # actors=Actor.objects.all()
+    actors=get_list_or_404(Actor)
     serializer=ActorSerializer(actors,many=True)
     return Response(serializer.data)
 
+# 배우 detail
 @api_view(['GET'])
 def actor_detail(request,actor_pk):
     actor=get_object_or_404(Actor,pk=actor_pk)
     serializer=ActorDetailSerializer(actor)
     return Response(serializer.data)
 
-@api_view(['GET'])
-def movie_list(request):
-    movies=Movie.objects.all()
-    serializer=MovieSerializer(movies,many=True)
-    return Response(serializer.data)
 
 
-@api_view(['GET'])
-def movie_detail(request,movie_pk):
-    movie=get_object_or_404(Movie,pk=movie_pk)
-    serializer=MovieDetailSerializer(movie)
-    return Response(serializer.data)
 
 @api_view(['GET'])
 def review_list(request):

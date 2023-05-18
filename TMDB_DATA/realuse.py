@@ -64,7 +64,7 @@ director_data_set=set()
 cast_data=list()
 cast_data_set=set()
 movie_data_fields=list()
-movie_data_fields_idx=dict()
+# movie_data_fields_idx=dict()
 for movie in movie_data:
     movie_id = movie['id']
     credits_url = f'https://api.themoviedb.org/3/movie/{movie_id}/credits'
@@ -76,22 +76,29 @@ for movie in movie_data:
 
     if credits_response.status_code == 200:
         credits_data = credits_response.json()
-        del movie['adult']
-        del movie['backdrop_path']
-        del movie['original_language']
-        del movie['original_title']
-        del movie['video']
-        del movie['vote_count']
-        movie['genres']=movie['genre_ids']
-        del movie['genre_ids']
-        movie['directors'] = [crew['id'] for crew in credits_data['crew'] if crew['job'] == 'Director']
-        movie['actors'] = [cast['id'] for cast in credits_data['cast']]
-        # director data를 추출
-        movie_data_fields_idx['pk']=movie['id']
-        del movie['id']
-        movie_data_fields_idx['model']="movies.movie"
-        movie_data_fields_idx['fields']=movie
-        movie_data_fields.append(movie_data_fields_idx)
+        # del movie['adult']
+        # del movie['backdrop_path']
+        # del movie['original_language']
+        # del movie['original_title']
+        # del movie['video']
+        # del movie['vote_count']
+        # movie['genres']=movie['genre_ids']
+        # del movie['genre_ids']
+        # movie['directors'] = [crew['id'] for crew in credits_data['crew'] if crew['job'] == 'Director']
+        # movie['actors'] = [cast['id'] for cast in credits_data['cast']]
+        # # director data를 추출
+        # movie_data_fields_idx['pk']=movie['id']
+        # del movie['id']
+        # movie_data_fields_idx['model']="movies.movie"
+        # movie_data_fields_idx['fields']=movie
+
+        movie_idx={'pk':movie['id'],'model':'movies.movie',
+                   'fields':{'overview':movie['overview'],'popularity':movie['popularity'],
+                             "poster_path":movie["poster_path"],"release_date":movie["release_date"],
+                             "title":movie["title"],"vote_average":movie["vote_average"],
+                             "genres":movie['genre_ids'],"directors":[crew['id'] for crew in credits_data['crew'] if crew['job'] == 'Director'],
+                             'actors':[cast['id'] for cast in credits_data['cast']]}}
+        movie_data_fields.append(movie_idx)
 
 
         for crew in credits_data['crew']:
@@ -124,16 +131,16 @@ print("영화 정보가 성공적으로 저장되었습니다.")
 #     json.dump(credits_response.json(), file, indent=4, ensure_ascii=False)
 
 # 감독 데이터를 JSON 파일로 저장
-with open('final_movie_director_data.json', 'w', encoding='utf-8') as file:
-    json.dump(director_data, file, indent=4, ensure_ascii=False)
+# with open('final_movie_director_data.json', 'w', encoding='utf-8') as file:
+#     json.dump(director_data, file, indent=4, ensure_ascii=False)
 
-print("감독 정보가 성공적으로 저장되었습니다.")
+# print("감독 정보가 성공적으로 저장되었습니다.")
 
-# 배우 데이터를 JSON 파일로 저장
-with open('final_movie_actor_data.json', 'w', encoding='utf-8') as file:
-    json.dump(cast_data, file, indent=4, ensure_ascii=False)
+# # 배우 데이터를 JSON 파일로 저장
+# with open('final_movie_actor_data.json', 'w', encoding='utf-8') as file:
+#     json.dump(cast_data, file, indent=4, ensure_ascii=False)
 
-print("배우 정보가 성공적으로 저장되었습니다.")
+# print("배우 정보가 성공적으로 저장되었습니다.")
 
 
 # with open('movie_data_detail_test.json', 'w', encoding='utf-8') as file:

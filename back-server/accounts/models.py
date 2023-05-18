@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from movies.models import Director,Actor,Movie
 
 # Create your models here.
 class User(AbstractUser):
@@ -8,3 +8,7 @@ class User(AbstractUser):
     profile_path = models.TextField(null=True)
     theme= models.CharField(default="default",max_length=50)
     followings=models.ManyToManyField('self',symmetrical=False, related_name='followers')
+    
+    movies=models.ManyToManyField(Director, related_name='like_users')
+    actors=models.ManyToManyField(Actor, related_name='like_users')
+    directors=models.ManyToManyField(Movie, related_name='like_users')
