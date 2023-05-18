@@ -22,7 +22,7 @@ class Movie(models.Model):
     id=models.IntegerField(unique=True,primary_key=True)
     title=models.CharField(max_length=100)
     overview=models.TextField()
-    release_date=models.DateField(null=True)
+    release_date=models.DateField(null=True, blank=True)
     poster_path=models.TextField()
     vote_average=models.IntegerField()
     popularity=models.IntegerField()
@@ -36,20 +36,20 @@ class Movie(models.Model):
 class Review(models.Model):
     title=models.CharField(max_length=100)
     content=models.TextField()
-    movie=models.ForeignKey(Movie, on_delete=models.CASCADE)
-    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='my_reviews')  
+    movie=models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='my_reviews', null=True, blank=True)  
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
-    likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
+    likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
 
 
 class Ratings(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
 
 class Comment(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, null=True, blank=True)
     comment=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
