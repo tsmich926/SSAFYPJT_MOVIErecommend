@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
 
     # auth
-    'dj_rest_auth'
+    'dj_rest_auth',
     # # simple jwt
     # 'rest_framework_simplejwt',
 

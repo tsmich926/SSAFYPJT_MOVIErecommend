@@ -18,5 +18,5 @@ urlpatterns = [
 
 
 
-    path('articles/<int:article_pk>/comments/', views.comment_create),
+    # path('articles/<int:article_pk>/comments/', views.comment_create),
 ]
