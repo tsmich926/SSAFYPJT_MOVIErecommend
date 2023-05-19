@@ -7,31 +7,52 @@ import router from '../router'
 
 Vue.use(Vuex)
 
+const API_URL = 'http://127.0.0.1:8000'
+
 export default new Vuex.Store({
   plulgins: [
     createPersistedState(),
   ],
+
   state: { token:null
   },
+
   getters: {
-    isLgin(state){
+    isLogin(state){
       return state.token ? true: false
     }
   },
+
   mutations: {
     SAVE_TOKEN(state,token){
       state.token = token
       router.push({name:'MovieList'})
     }
   },
+
   actions: {
-    login(context,payload){
+    // logout
+    LogOut(context){
+      axios({
+        method:'post',
+        url:`${API_URL}/accounts/logout/`,        
+      })
+      .then(res=>{
+        console.log(res)
+        this.$store.state.token=null
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
+    // login
+    LogIn(context,payload){
       const username = payload.username
       const password = payload.password
     
       axios({
         method:'post',
-        // url:`${}/accounts/login`,
+        url:`${API_URL}/accounts/login/`,
         data:{
           username,password
         }
@@ -43,24 +64,27 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    SignUp(context,payload) {
+    //SignUp
+    SignUp(context, payload) {
       const username = payload.username
-      const password = payload.password
+      const password1 = payload.password1
+      const password2 = payload.password2
 
       axios({
-        method:'post',
-        // url:`${}/accounts/login`,
+        method: 'post',
+        url: `${API_URL}/accounts/signup/`,
         data: {
-          username,password
+          username, password1, password2
         }
       })
-        .then((res)=>{
-          context.commit('SAVE_TOKEN',res.data.key)
+        .then((res) => {
+          console.log(res)
+          context.commit('SAVE_TOKEN', res.data.key)
         })
-        .catch((err)=>{
-          console.log(err)
-        })
-    }
+        .catch((err) => {
+        console.log(err)
+      })
+    },
   },
   modules: {
   }

@@ -6,6 +6,7 @@
       <router-link to="/Recommend">Recommendation</router-link>|
       <router-link to="/Community">Community</router-link>|
       <router-link to="/Login">로그인</router-link>|
+      <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>|
       <!-- <TesT /> -->
       <router-view />
     </nav>
@@ -20,7 +21,17 @@ export default {
   components:{
     // TesT
   },
-  name: "NavigationBar"
+  name: "NavigationBar",
+  computed:{
+    isLogin(){
+      return this.store.$getters.isLogin
+    }
+  },
+  methods:{
+    LogOut(){
+      this.$store.dispatch('LogOut',payload)
+    },
+  }
 }
 </script>
 

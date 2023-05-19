@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="userloginbox">
-      <form v-on:submit.prevent="login">
+      <form v-on:submit.prevent="LogIn">
         <input type="text" placeholder="userName" v-model="username" required>
         <input type="password" placeholder="userPassWord" v-model="password" required>
         <br>
@@ -27,7 +27,7 @@ export default {
     }
   },
   methods: {
-    login() {
+    LogIn() {
       const username = this.username
       const password = this.password
 
@@ -35,7 +35,7 @@ export default {
         username,password
       }
 
-      this.$store.dispatch('login',payload)
+      this.$store.dispatch('LogIn',payload)
     },
     // logout()
   }
