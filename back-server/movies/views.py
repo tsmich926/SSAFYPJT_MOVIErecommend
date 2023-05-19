@@ -3,11 +3,12 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-from .models import Movie,Review,Actor
-from .serializers import MovieSerializer,ActorSerializer,ReviewSerializer,MovieDetailSerializer,ActorDetailSerializer,ReviewDetailSerializer,MovieSearchSerializer
+from .models import Movie,Review,Actor,Director,Genre,Rating,Comment
+from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,MovieDetailSerializer,
+                          ActorDetailSerializer,ReviewDetailSerializer,MovieSearchSerializer,
+                         DirectorDetailSerializer, DirectorSerializer, GenreSerializer,GenreDetailSerializer,
+                         CommentSerializer,RatingSerializer )
 # Create your views here.
-
-
 
 
 # 영화 전체 리스트를 요청하는 것.
@@ -53,42 +54,130 @@ def actor_detail(request,actor_pk):
     serializer=ActorDetailSerializer(actor)
     return Response(serializer.data)
 
+# 전체 감독리스트 요청 (이름, 사진)
+@api_view(['GET'])
+def director_list(request):
+    # actors=Actor.objects.all()
+    directors=get_list_or_404(Director)
+    serializer=DirectorSerializer(directors,many=True)
+    return Response(serializer.data)
 
+# 감독 detail
+@api_view(['GET'])
+def director_detail(request,director_pk):
+    director=get_object_or_404(Actor,pk=director_pk)
+    serializer=DirectorDetailSerializer(director)
+    return Response(serializer.data)
 
+# 전체 장르 요청
+@api_view(['GET'])
+def genre_list(request):
+    # actors=Actor.objects.all()
+    genres=get_list_or_404(Genre)
+    serializer=GenreSerializer(genres,many=True)
+    return Response(serializer.data)
 
+# 장르 detail
+@api_view(['GET'])
+def genre_detail(request,genre_pk):
+    genre=get_object_or_404(Actor,pk=genre_pk)
+    serializer=GenreDetailSerializer(genre)
+    return Response(serializer.data)
+
+# 전체 리뷰 조회
 @api_view(['GET'])
 def review_list(request):
     reviews=Review.objects.all()
     serializer=ReviewSerializer(reviews,many=True)
     return Response(serializer.data)
 
+################################# 수정 중
+# path('reviews/<int:review_pk>',views.review_detail),
 @api_view(['GET','PUT','DELETE'])
 def review_detail(request,review_pk):
     review=get_object_or_404(Review,pk=review_pk)
-
+    # 리뷰 조회
     if request.method=='GET':
         serializer=ReviewDetailSerializer(review)
         return Response(serializer.data)
-    
+    # 리뷰 수정
     if request.method=='PUT':
         serializer=ReviewSerializer(review,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        
+    # 리뷰 삭제
     if request.method=='DELETE':
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 @api_view(['POST'])
 def create_review(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
     serializer=ReviewSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
         serializer.save(movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
+
+@api_view(['POST'])
+def create_comment(request,review_pk):
+    review=get_object_or_404(Review,pk=review_pk)
+    serializer=CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+        serializer.save(review=review)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+@api_view(['PUT','DELETE'])
+def comment_detail(request,comment_pk):
+    comment=get_object_or_404(comment,pk=comment_pk)
+    # 댓글 수정
+    if request.method=='PUT':
+        serializer=CommentSerializer(comment,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    # 댓글 삭제
+    if request.method=='DELETE':
+        comment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def create_rating(request,movie_pk):
+    movie=get_object_or_404(Movie,pk=movie_pk)
+    serializer=RatingSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user)
+        serializer.save(movie=movie)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+@api_view(['PUT','DELETE'])
+def rating_detail(request,rating_pk):
+    rating=get_object_or_404(rating,pk=rating_pk)
+    # rating 수정
+    if request.method=='PUT':
+        serializer=RatingSerializer(rating,data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+    # rating 삭제
+    if request.method=='DELETE':
+        rating.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+################################# 수정 중
+
+
+# @api_view(['POST'])
+# def create_review(request,movie_pk):
+#     movie=get_object_or_404(Movie,pk=movie_pk)
+#     serializer=ReviewSerializer(data=request.data)
+#     if serializer.is_valid(raise_exception=True):
+#         serializer.save(movie=movie)
+#         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 
 ################

@@ -13,17 +13,31 @@ urlpatterns = [
     path('actors/',views.actor_list),
     # actor detail
     path('actors/<int:actor_pk>/',views.actor_detail),
-    
+    # director whole
+    path('directors/',views.director_list),
+    # director detail
+    path('directors/<int:director_pk>/',views.director_detail),
+    # genre whole
+    path('genres/',views.genre_list),
+    # genre detail
+    path('genres/<int:genre_pk>/',views.genre_detail),
+
+    # review whole
     path('reviews/',views.review_list),
-    path('reviews/<int:review_pk>/',views.review_detail),
-    path('movies/<int:movie_pk>/reviews/',views.create_review),
+    # review detail method에 따라 조회, 삭제, 수정
+    path('reviews/<int:review_pk>',views.review_detail),
+    # review create
+    path('movies/<int:movie_pk>/review/',views.create_review),
+
+    # create comment
+    path('movies/<int:review_pk>/comment/',views.create_comment),
+    # comment method에 따라 조회, 삭제, 수정
+    path('comments/<int:comment_pk>',views.review_detail),
+    
+    # create rating
+    path('movies/<int:movie_pk>/rating/',views.create_rating),
+    # comment method에 따라 조회, 삭제, 수정
+    path('ratings/<int:rating_pk>',views.review_detail),
 
 
-    ## 리뷰
-    # path('review/', views.review_list),
-    # path('review/<int:article_pk>/', views.review_detail),
-
-
-
-    # path('articles/<int:article_pk>/comments/', views.comment_create),
 ]

@@ -54,10 +54,11 @@ class Review(models.Model):
     updated_at=models.DateTimeField(auto_now=True)
     likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
 
+    # title, content, movie 응답받아서 넘겨줄 것, user는 request.user, likes는 비어있을 수 있음.
 
-class Ratings(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, null=True, blank=True)
+class Rating(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE,  related_name='ratings')
     score = models.IntegerField()
 
 class Comment(models.Model):
