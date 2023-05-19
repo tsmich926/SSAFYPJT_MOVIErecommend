@@ -1,11 +1,9 @@
 <template>
   <div class= "container">
     <div class="row">
-      <!-- <div class="col-md-4" v-for="movie in movies" :key="movie.id"> -->
-        <!-- <img src="" alt=""> -->
         <div class="card-body">
-          <h1 class="card-title">{{movie.title}}</h1>
-          <p class="card-text">{{movie.overview}}</p>
+          <h1 class="card-title">movie.title</h1>
+          <p class="card-text">movie.overview</p>
         </div>
       <!-- </div> -->
     </div>

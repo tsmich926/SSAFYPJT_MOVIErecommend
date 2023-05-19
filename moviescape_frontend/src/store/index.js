@@ -32,7 +32,7 @@ export default new Vuex.Store({
 
   actions: {
     // logout
-    LogOut(context){
+    LogOut(){
       axios({
         method:'post',
         url:`${API_URL}/accounts/logout/`,        

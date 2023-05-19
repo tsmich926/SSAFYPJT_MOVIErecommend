@@ -1,35 +1,25 @@
 <template>
   <div>
     <p>Community</p>
-    <CommuArticle />
-    <CreateArticle />
+    <div>
+      <p>게시글</p>
+      <input type="button" value="게시글 작성" @click="gotoCreateArticle">
+    </div>
     
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <span class="page-link">Previous</span>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item " aria-current="page">
-          <span class="page-link">2</span>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
+    
   </div>
 </template>
 
 <script>
-import CommuArticle from "@/components/CommuArticle";
-import CreateArticle from "@/components/CreateArticle"
 
 export default {
 
   components: { 
-    CommuArticle, CreateArticle
+  },
+  methods:{
+    gotoCreateArticle(){
+      this.$router.push({name:'CreateArticleView'})
+    }
   }
 
 }

@@ -1,40 +1,37 @@
 <template>
   <div id="app">
+    <h2>navbar test</h2>
     <nav>
       <!-- <router-link to="/">Home</router-link> | -->
       <router-link to="/MovieList">MovieList</router-link>|
+      <router-link to="/MovieDetailView">MovieDetail</router-link>|
       <router-link to="/Recommend">Recommendation</router-link>|
       <router-link to="/Community">Community</router-link>|
-      <router-link to="/Login">로그인</router-link>|
+      <router-link v-show="!isLogin" to="/Login">로그인</router-link>|
       <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>|
       <!-- <TesT /> -->
       <router-view />
     </nav>
-    <input type="text " placeholder="영화를 검색해 보세요" v-model="keyword">
-    <input type="submit" value="검색">
+    <!-- <input type="text" placeholder="영화를 검색해 보세요" v-model="keyword">
+    <input type="submit" value="검색"> -->
   </div>
 </template>
 
 <script>
-// import TesT from '@/components/TesT.vue'
 export default {
-  components:{
-    // TesT
-  },
   name: "NavigationBar",
-  computed:{
-    isLogin(){
-      return this.store.$getters.isLogin
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin;
     }
   },
-  methods:{
-    LogOut(){
-      this.$store.dispatch('LogOut',payload)
-    },
+  methods: {
+    LogOut() {
+      this.$store.dispatch('LogOut');
+    }
   }
 }
 </script>
-
 
 <style>
 #app {
@@ -43,7 +40,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ebeef1;
-
 }
 
 nav {

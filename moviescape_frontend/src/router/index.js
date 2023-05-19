@@ -6,7 +6,8 @@ import CommunityView from '../views/CommunityView.vue'
 import RecoView from '../views/RecoView.vue'
 import LoginView from '../views/LoginView.vue'
 import Signupview from '../views/SignupView.vue'
-
+import CreateArticleView from '../views/CreateArticleView.vue'
+import MovieDetailView from '../views/MovieDetailView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -40,6 +41,17 @@ const routes = [
     name: 'SignUp',
     component: Signupview
   },
+  {
+    path: '/CreateArticleView',
+    name: 'CreateArticleView',
+    component: CreateArticleView
+  },
+  {
+    path: '/MovieDetailView',
+    name: 'MovieDetailView',
+    component: MovieDetailView
+  },
+  
 ]
 
 const router = new VueRouter({

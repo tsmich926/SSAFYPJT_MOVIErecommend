@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <nav>
-      
-      <NavigationBar/>
-    </nav>
+    <div>
+      <h1>jweiorjiopwef</h1>
+      <NavigationBar />
+    </div>
 
     <div>
 
@@ -16,7 +16,10 @@ import NavigationBar from '@/components/NavigationBar.vue'
 
 
 export default {
-  components: { NavigationBar
+  name:'app',
+
+  components: {
+    NavigationBar
   }
 }
 </script>
@@ -25,4 +28,8 @@ export default {
   #app {
     background-color: black;
   }
+.white-bg-box{
+  background-color: white;
+
+}
 </style>
