@@ -17,8 +17,8 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/MovieList',
-    name: 'MovieList',
+    path: '/MovieListView',
+    name: 'MovieListView',
     component: MovieListView
   },
   {

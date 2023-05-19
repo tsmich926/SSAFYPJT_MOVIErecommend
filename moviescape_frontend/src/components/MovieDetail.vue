@@ -3,10 +3,16 @@
     <p>pppp</p>
     <h1>검색할 제목을 입력</h1>
     <input type="text" v-model="title" >
-    <button @click="getMovie"></button>
+    <button @click="getMovie">검색</button>
     <div>
       <div v-for="movie in movies" :key="movie.pk">
-        <h3>제목예정</h3>
+       <div>
+          <h3>
+            <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
+          </h3>
+          <h3>{{movie.title}}</h3>
+          <h3>{{movie.overview}}</h3>
+        </div>
       </div>
     </div>
 
@@ -33,7 +39,7 @@ export default {
       })
       .then(res=> {
         console.log(res)
-        // this.movielist=res
+        this.movielist=res.data
       })
       .catch(err=>{
         console.log(err)
