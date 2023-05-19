@@ -65,7 +65,7 @@ def director_list(request):
 # 감독 detail
 @api_view(['GET'])
 def director_detail(request,director_pk):
-    director=get_object_or_404(Actor,pk=director_pk)
+    director=get_object_or_404(Director,pk=director_pk)
     serializer=DirectorDetailSerializer(director)
     return Response(serializer.data)
 
@@ -80,7 +80,7 @@ def genre_list(request):
 # 장르 detail
 @api_view(['GET'])
 def genre_detail(request,genre_pk):
-    genre=get_object_or_404(Actor,pk=genre_pk)
+    genre=get_object_or_404(Genre,pk=genre_pk)
     serializer=GenreDetailSerializer(genre)
     return Response(serializer.data)
 
@@ -111,6 +111,7 @@ def review_detail(request,review_pk):
         review.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+# review create 리뷰생성
 @api_view(['POST'])
 def create_review(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
@@ -120,7 +121,7 @@ def create_review(request,movie_pk):
         serializer.save(movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
-
+# comment create 댓글생성
 @api_view(['POST'])
 def create_comment(request,review_pk):
     review=get_object_or_404(Review,pk=review_pk)
@@ -129,7 +130,8 @@ def create_comment(request,review_pk):
         serializer.save(user=request.user)
         serializer.save(review=review)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
-
+    
+# 댓글 수정, 삭제
 @api_view(['PUT','DELETE'])
 def comment_detail(request,comment_pk):
     comment=get_object_or_404(comment,pk=comment_pk)
@@ -144,7 +146,7 @@ def comment_detail(request,comment_pk):
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
+# rating create 평점생성
 @api_view(['POST'])
 def create_rating(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
@@ -153,7 +155,7 @@ def create_rating(request,movie_pk):
         serializer.save(user=request.user)
         serializer.save(movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
-
+# rating 수정, 삭제
 @api_view(['PUT','DELETE'])
 def rating_detail(request,rating_pk):
     rating=get_object_or_404(rating,pk=rating_pk)
