@@ -10,7 +10,7 @@
 import MovieDetail from '../components/MovieDetail.vue'
 export default {
   name:'MovieDetailView',
-  componenets:{
+  components:{
 
     MovieDetail
   },
