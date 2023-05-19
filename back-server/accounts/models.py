@@ -9,6 +9,6 @@ class User(AbstractUser):
     theme= models.CharField(default="default",max_length=50)
     followings=models.ManyToManyField('self',symmetrical=False, related_name='followers')
     
-    movies=models.ManyToManyField(Director, related_name='like_users')
-    actors=models.ManyToManyField(Actor, related_name='like_users')
-    directors=models.ManyToManyField(Movie, related_name='like_users')
+    movies=models.ManyToManyField(Director, related_name='like_users', blank=True)
+    actors=models.ManyToManyField(Actor, related_name='like_users', blank=True)
+    directors=models.ManyToManyField(Movie, related_name='like_users', blank=True)

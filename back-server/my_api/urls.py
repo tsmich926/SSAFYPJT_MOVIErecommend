@@ -26,10 +26,11 @@ from django.urls import path,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    # path('dj-rest-auth/', include('dj_rest_auth.urls')),
     path('api/v1/',include('movies.urls')),
     path('accounts/', include('dj_rest_auth.urls')),
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
+    
     # path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
