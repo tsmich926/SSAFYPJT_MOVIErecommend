@@ -1,10 +1,11 @@
 <template>
   <div>
     <h1>MovieListItems</h1>
-    <div>
-      <div v-for="movie in ITEMmovies" :key="movie.pk" >
-        <!-- <MovieCard :CARDmovie="movie"/> -->
-        <MovieCard :CARDmovie="movie"/>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col" v-for="movie in ITEMmovies" :key="movie.pk" >
+          <MovieCard :CARDmovie="movie"/>
+        </div>
       </div>
     </div>
   </div>
@@ -35,5 +36,11 @@ export default {
 </script>
 
 <style>
-
+/* .my-min-card{
+  display:flex;
+  justify-content: center;
+  flex-grow: 0;
+  min-width: 200px;
+  min-height: 400px;
+} */
 </style>

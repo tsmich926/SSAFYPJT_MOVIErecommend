@@ -1,6 +1,6 @@
 <template>
-  <div id="navbar-container">
-    <nav class="navbar my_navBar fixed-nav">
+  <div>
+     <nav class="navbar fixed-nav my_navBar"> <!--//여기에수정 -->
       <div class="scroll-wrapper">
         <a class="navbar-brand" href="/">
           <img src="@/assets/escape.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
@@ -10,39 +10,12 @@
         <router-link to="/MovieDetailView">MovieDetail</router-link>
         <router-link to="/Recommend">Recommendation</router-link>
         <router-link to="/Community">Community</router-link>
-        <router-link to="/ActorListView">ActorListView</router-link>
         <router-link v-show="!isLogin" to="/Login">로그인</router-link>
+        <router-link to="/ActorListView">ActorListView</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
+        <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
       </div>
     </nav>
-
-    <!-- <nav class="navbar my_navBar fixed-nav">
-      <div class="container-fluid scroll-wrapper">
-        <a class="navbar-brand" href="/">
-          <img src="@/assets/escape.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-          Moviescape
-        </a>
-        <div class="scroll-wrapper">
-        <router-link to="/MovieList">MovieList</router-link>
-        <router-link to="/MovieDetailView">MovieDetail</router-link>
-        <router-link to="/Recommend">Recommendation</router-link>
-        <router-link to="/Community">Community</router-link>
-        <router-link v-show="!isLogin" to="/Login">로그인</router-link>
-        <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
-        </div>
-      </div>
-    </nav> -->
-
-    <!-- <nav class="">
-      <div class="scroll-wrapper">
-        <router-link to="/MovieList">MovieList</router-link>
-        <router-link to="/MovieDetailView">MovieDetail</router-link>
-        <router-link to="/Recommend">Recommendation</router-link>
-        <router-link to="/Community">Community</router-link>
-        <router-link v-show="!isLogin" to="/Login">로그인</router-link>
-        <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
-      </div>
-    </nav> -->
     <router-view />
   </div>
 </template>
@@ -64,33 +37,42 @@ export default {
 </script>
 
 <style scoped>
-  /* overflow-x: auto; */
+/* overflow-x: auto; */
 #navbar-container {
-  width:100%;
-  white-space: nowrap;
+  width: 100%;
 }
-.horizontal-scroll {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+
+nav a {
+  font-weight: bold;
+  color: #ffffff;
 }
-.horizontal-scroll::-webkit-scrollbar {
-  height: 10px;
+
+nav a.router-link-exact-active {
+  color: #cee2c5;
 }
-.horizontal-scroll::-webkit-scrollbar-track {
-  background-color: transparent;
+
+.my_navBar {
+  justify-content: center;
+  align-content: center;
+  text-align: center;
 }
-.horizontal-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-}
+
 .scroll-wrapper {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center; /*세로로 중앙 */
   padding: 10px;
-  background-color: rgb(55, 58, 58);
+  background-color: black;
+  width: 100%;
 }
+
+.navbar-items {
+  display: flex;
+  align-items: center;
+}
+
 .scroll-wrapper > * {
   margin-right: 10px;
+  white-space: nowrap; /* 줄바꿈 방지  */
 }
 </style>

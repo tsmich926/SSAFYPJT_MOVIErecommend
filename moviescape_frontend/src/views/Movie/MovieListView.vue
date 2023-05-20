@@ -1,5 +1,5 @@
 <template>
-  <div class= "container">
+  <div class= "my_MovieListView_BGC">
     <h1>MovieListView</h1>
     <div>
       <MovieListItems :ITEMmovies="movie_list"/>
@@ -46,6 +46,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.my_MovieListView_BGC{
+  background-color: #575656;
+}
 </style>
