@@ -64,8 +64,8 @@ export default {
 </script>
 
 <style scoped>
-#navbar-container {
   /* overflow-x: auto; */
+#navbar-container {
   width:100%;
   white-space: nowrap;
 }
