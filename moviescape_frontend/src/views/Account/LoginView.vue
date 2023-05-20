@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>LoginView</h1>
     <div class="userloginbox">
       <form v-on:submit.prevent="LogIn">
         <input type="text" placeholder="userName" v-model="username" required>

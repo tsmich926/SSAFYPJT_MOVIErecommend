@@ -1,13 +1,10 @@
 <template>
   <div id="app" class="super_space my_backgroundimg">
-    <div class="nav_space"></div>
+    <div class="nav_space">
+    </div>
     <div class="my_content">
       <h1>여기는 App</h1>
       <NavigationBar />
-    </div>
-
-    <div>
-
     </div>
   </div>
 </template>
@@ -26,8 +23,14 @@ export default {
 </script>
 
 <style>
+#app {
+    background-color: rgb(71, 71, 71);
+    color: white;
+    width:100%;
+    height:100%;
+}
 .my_backgroundimg{
-  background-image: url('@/assets/Backgroundimg1.jfif');
+  background-image: url('@/assets/Backgroundimg3.jfif');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -46,12 +49,6 @@ export default {
   max-width: 80%; /* 내용의 최대 너비를 지정 */
   text-align: center; /* 내용을 가운데 정렬 */
 }
-  #app {
-    background-color: rgb(71, 71, 71);
-    color: white;
-    width:100%;
-    height:100%;
-  }
 .white-bg-box{
   background-color: white;
 

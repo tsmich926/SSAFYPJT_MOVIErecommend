@@ -1,5 +1,6 @@
 <template>
   <div class="usersignupbox">
+    <h1>SignUpView</h1>
       <form v-on:submit.prevent="SignUp">
         <h2>Create an account</h2>
         <input type="text" placeholder="UserName" v-model="username">
@@ -14,7 +15,7 @@
 
 <script>
 export default {
-  name:'SignUP',
+  name:'SignUpView',
   data(){
     return {
       username:null,

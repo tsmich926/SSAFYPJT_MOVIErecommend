@@ -1,19 +1,24 @@
 <template>
   <div>
-    <p>Community</p>
+    <p>ReviewListView</p>
+
+
+
+
+
+
     <div>
       <p>게시글</p>
       <input type="button" value="게시글 작성" @click="gotoCreateArticle">
     </div>
-    
-    
   </div>
 </template>
 
 <script>
 
 export default {
-
+  name:'ReviewListView',
+  
   components: { 
   },
   methods:{

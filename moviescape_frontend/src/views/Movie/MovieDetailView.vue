@@ -1,18 +1,17 @@
 <template>
   <div class= "container">
-    <h1>wfweffwewf</h1>
-    왜 안나와
-    <MovieDetail />
+    <h1>MovieDetailView</h1>
+    <!-- <MovieDetail /> -->
   </div>
 </template>
 
 <script>
-import MovieDetail from '../components/MovieDetail.vue'
+// import MovieDetail from '@/components/MovieDetail.vue'
 export default {
   name:'MovieDetailView',
   components:{
 
-    MovieDetail
+    // MovieDetail
   },
   data(){
     return {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>CreateReviewView</h1>
     <div class="board-detail">
       <form action="">
         <div class="board-contents">
@@ -10,7 +11,7 @@
         </div>
       </form>
       <div class="common-buttons">
-        <input type="button" class="btn btn-primary" style="background-color: #008080;" value="작성">&nbsp;
+        <input type="button" @click="saveArticle" class="btn btn-primary" style="background-color: #008080;" value="작성완료">&nbsp;
         <input type="button" @click="gotoComunityView" class="btn btn-primary" style="background-color: #008080;" value="목록">&nbsp;
 
       </div>
@@ -19,8 +20,9 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default { 
-  name:'CreateArticle',
+  name:'CreateReviewView',
   data(){
     return{
       content:null,
@@ -30,6 +32,32 @@ export default {
   methods:{
     gotoComunityView(){
       this.$router.push({name:'Community'})
+    },
+    saveArticle(){
+      const API ='http://127.0.0.1:8000/'
+      
+      const  title = this.title
+      const content = this.content
+
+      if(!title){
+        alert('제목을 입력하세요')
+      } else if (!content){
+        alert('내용을 입력하세요')
+        return
+      }
+    
+      axios({
+        method:'post',
+        url:`${API}/api/v1/reviews/`,
+        data: {title,content}
+      })
+      .then((res)=>{
+        console.log(res)
+        // this.$router.push({name:''})
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     }
   },
   computed:{

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <p>pppp</p>
+    <p>MovieSearchItems</p>
     <h1>검색할 제목을 입력</h1>
-    <input type="text" v-model="title" >
-    <button @click="getMovie">검색</button>
+    <input type="text" v-model="title" @input="getMovie">
+    <button @click="toNull">초기화</button>
     <div>
       <div v-for="movie in movies" :key="movie.pk">
        <div>
@@ -22,11 +22,11 @@
 <script>
 import axios from 'axios';
 export default {
-  name:'MovieDetail',
+  name:'MovieSearchItems',
   data(){
     return{
       title:null,
-      movielist:null,
+      movie_list:null,
     }
   },
   methods:{
@@ -39,16 +39,19 @@ export default {
       })
       .then(res=> {
         console.log(res)
-        this.movielist=res.data
+        this.movie_list=res.data
       })
       .catch(err=>{
         console.log(err)
       })
+    },
+    toNull(){
+      this.title=null
     }
   },
   computed:{
     movies(){
-      return this.movielist
+      return this.movie_list
     }
   }
 
