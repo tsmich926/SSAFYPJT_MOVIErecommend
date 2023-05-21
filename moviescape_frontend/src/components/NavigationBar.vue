@@ -14,6 +14,7 @@
         <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
         <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
+        <MovieSearchItems/>
       </div>
     </nav>
     <router-view />
@@ -21,8 +22,12 @@
 </template>
 
 <script>
+import MovieSearchItems from '@/components/MovieSearchItems.vue';
 export default {
   name: "NavigationBar",
+  components:{
+    MovieSearchItems,
+  },
   computed: {
     isLogin() {
       return this.$store.getters.isLogin;
@@ -44,7 +49,8 @@ export default {
 
 nav a {
   font-weight: bold;
-  color: #ffffff;
+  color: #fff;
+  text-decoration: none;
 }
 
 nav a.router-link-exact-active {
@@ -60,19 +66,26 @@ nav a.router-link-exact-active {
 .scroll-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center; /*세로로 중앙 */
-  padding: 10px;
-  background-color: black;
-  width: 100%;
-}
-
-.navbar-items {
-  display: flex;
   align-items: center;
+  padding: 10px;
 }
 
 .scroll-wrapper > * {
   margin-right: 10px;
-  white-space: nowrap; /* 줄바꿈 방지  */
+  white-space: nowrap;
+}
+
+.navbar-brand img {
+  margin-right: 5px;
+}
+
+.btn-primary {
+  background-color: #222;
+  border-color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #fff;
+  color: #222;
 }
 </style>

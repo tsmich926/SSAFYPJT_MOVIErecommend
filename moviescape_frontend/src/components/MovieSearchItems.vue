@@ -1,17 +1,14 @@
 <template>
   <div>
-    <p>MovieSearchItems</p>
-    <h1>검색할 제목을 입력</h1>
     <input type="text" v-model="title" @input="getMovie">
     <button @click="toNull">초기화</button>
-    <div>
-      <div v-for="movie in movies" :key="movie.pk">
+    <div class="my-absolute-position">
+      <div class="" v-for="movie in movies" :key="movie.pk">
        <div>
           <h3>
             <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
           </h3>
           <h3>{{movie.title}}</h3>
-          <h3>{{movie.overview}}</h3>
         </div>
       </div>
     </div>
@@ -58,6 +55,16 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.my-absolute-position {
+  position: absolute;
+  /* 다른 스타일 설정 */
+}
 
+.my-floating-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 다른 스타일 설정 */
+}
 </style>

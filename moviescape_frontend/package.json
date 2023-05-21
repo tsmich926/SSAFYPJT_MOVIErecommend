@@ -13,6 +13,7 @@
     "node-sass": "^8.0.0",
     "sass-loader": "^13.2.2",
     "vue": "^2.7.14",
+    "vue-infinite-loading": "^2.4.5",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"
