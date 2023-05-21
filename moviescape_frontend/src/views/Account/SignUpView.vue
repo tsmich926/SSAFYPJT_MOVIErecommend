@@ -4,7 +4,10 @@
       <form v-on:submit.prevent="SignUp">
         <h2>Create an account</h2>
         <input type="text" placeholder="UserName" v-model="username">
-        <input type="password" placeholder="Password" v-model="password">
+        <hr>
+        <input type="password" placeholder="Password" v-model="password1">
+        <hr>
+        <input type="password" placeholder="PasswordConfirm" v-model="password2">
         <input type="submit" value="Sign up">
         <p>Already have an account?
           <router-link to="/Login">Login</router-link>
@@ -19,16 +22,18 @@ export default {
   data(){
     return {
       username:null,
-      password:null
+      password1:null,
+      password2:null
     }
   },
   methods: {
     SignUp(){
       const username = this.username
-      const password = this.password
+      const password1 = this.password1
+      const password2 = this.password2
 
       const payload = {
-        username,password
+        username,password1,password2
       }
       this.$store.dispatch('SignUp',payload)
     }

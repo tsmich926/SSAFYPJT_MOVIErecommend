@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>LoginView</h1>
+    wefwefe
     <div class="userloginbox">
       <form v-on:submit.prevent="LogIn">
         <input type="text" placeholder="userName" v-model="username" required>
@@ -8,7 +9,7 @@
         <br>
         <input type="submit" value="Login">
         <p class="signup">don't have an account?
-          <router-link to="/Signup">signup</router-link>
+          <router-link to="/SignUpView">signup</router-link>
           <!-- <a href="javascript:void(0);" @click="toggleForm">Sign up</a> -->
         </p>
       </form>

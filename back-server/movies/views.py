@@ -3,6 +3,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
+
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Movie,Review,Actor,Director,Genre,Rating,Comment
 from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,MovieDetailSerializer,
                           ActorDetailSerializer,ReviewDetailSerializer,MovieSearchSerializer,
@@ -14,8 +19,8 @@ from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,Movie
 # 영화 전체 리스트를 요청하는 것.
 @api_view(['GET'])
 def movie_list(request):
-    # movies=Movie.objects.all()
-    movies=get_list_or_404(Movie)
+    movies=Movie.objects.all()[:100]
+    # movies=get_list_or_404(Movie)
     serializer=MovieSerializer(movies,many=True)
     return Response(serializer.data)
 
@@ -42,8 +47,8 @@ def movie_detail(request,movie_pk):
 # 전체 배우리스트 요청 (이름, 사진)
 @api_view(['GET'])
 def actor_list(request):
-    # actors=Actor.objects.all()
-    actors=get_list_or_404(Actor)
+    actors=Actor.objects.all()[:100]
+    # actors=get_list_or_404(Actor)
     serializer=ActorSerializer(actors,many=True)
     return Response(serializer.data)
 
@@ -113,12 +118,19 @@ def review_detail(request,review_pk):
 
 # review create 리뷰생성
 @api_view(['POST'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def create_review(request,movie_pk):
-    movie=get_object_or_404(Movie,pk=movie_pk)
+    movie=get_object_or_404(Movie,id=movie_pk)
     serializer=ReviewSerializer(data=request.data)
+    # print("useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser")
+    # print(request.user)
+    # print(movie)
+    # print(movie.title)
+    # print(request)
+    # print("useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser")
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
-        serializer.save(movie=movie)
+        serializer.save(user=request.user, movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 # comment create 댓글생성

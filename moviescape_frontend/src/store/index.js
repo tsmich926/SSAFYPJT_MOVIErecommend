@@ -19,7 +19,7 @@ export default new Vuex.Store({
 
   getters: {
     isLogin(state){
-      return state.token ? true: false
+      return state.token ? true:false
     }
   },
 
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       })
       .then(res=>{
         console.log(res)
-        this.$store.state.token=null
+        this.state.token=null
       })
       .catch(err=>{
         console.log(err)
@@ -69,7 +69,6 @@ export default new Vuex.Store({
       const username = payload.username
       const password1 = payload.password1
       const password2 = payload.password2
-
       axios({
         method: 'post',
         url: `${API_URL}/accounts/signup/`,

@@ -34,9 +34,9 @@ export default {
       this.$router.push({name:'Community'})
     },
     saveArticle(){
-      const API ='http://127.0.0.1:8000/'
+      const API ='http://127.0.0.1:8000'
       
-      const  title = this.title
+      const title = this.title
       const content = this.content
 
       if(!title){
@@ -48,12 +48,18 @@ export default {
     
       axios({
         method:'post',
-        url:`${API}/api/v1/reviews/`,
-        data: {title,content}
+        url:`${API}/api/v1/movies/38015/review/`,
+        data: {
+          title,
+          content,
+          },
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
       })
       .then((res)=>{
         console.log(res)
-        // this.$router.push({name:''})
+        this.$router.push({name:'ReviewListView'})
       })
       .catch((err)=>{
         console.log(err)

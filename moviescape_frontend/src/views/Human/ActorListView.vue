@@ -2,13 +2,13 @@
     <div>
         <div>
             <p>ActorListView</p>
-            <HumanListItems/>
+            <HumanListItems :ITEMactors="actor_list"/>
         </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
 import HumanListItems from '@/components/HumanListItems.vue'
 
 export default {
@@ -17,29 +17,36 @@ components: {HumanListItems},
 
 data() {
     return {
-    // actor:'',
-    // actors: [],
+
+    actors: [],
     };
 },
-
-created() {
-    const API = 'http://127.0.0.1:8000/'
-    axios({
+computed:{
+    actor_list (){
+        return this.actors
+    }
+},
+methods: {
+    getWholeActors(){
+        axios({
         method:'get',
-        url:`${API}/api/v1/actors/`,
+        url:`http://127.0.0.1:8000/api/v1/actors/`,
     })
     .then((res)=>{
-        console.log(res)
-        // this.$router.push({name:''})
+        console.log(res.data)
+        this.actors = res.data
+
     })
     .catch((err)=>{
         console.log(err)
-        })
+            })
+        }
     },
-    computed:{
-        // actors 
-    },
+    created(){
+    this.getWholeActors()
+    }
 };
+
 </script>
 
 <style>

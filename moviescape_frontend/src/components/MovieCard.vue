@@ -41,13 +41,6 @@ export default {
   text-overflow: ellipsis;
   word-wrap: break-word;
 }
-/* .my-min-card{
-  display:flex;
-  justify-content: center;
-  flex-grow: 0;
-  min-width: 200px;
-  min-height: 400px;
-} */
 .my-card {
   width: 18rem;
   height: 38rem;

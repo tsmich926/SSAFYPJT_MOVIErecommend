@@ -18,7 +18,7 @@ import ReviewListView from '@/views/Review/ReviewListView.vue'
 import CreateReviewView from '@/views/Review/CreateReviewView.vue'
 
 // Recommend
-import RecoView from '@/views/Recommend/RecommendView.vue'
+import RecommendView from '@/views/Recommend/RecommendView.vue'
 
 // Account
 import LoginView from '@/views/Account/LoginView.vue'
@@ -84,9 +84,9 @@ const routes = [
 
   // Recommend
   {
-    path: '/Recommend',
-    name: 'Recommend',
-    component: RecoView
+    path: '/RecommendView',
+    name: 'RecommendView',
+    component: RecommendView
   },
   // ###############
 

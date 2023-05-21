@@ -8,10 +8,10 @@
         </a>
         <router-link :to="{name:'MovieListView'}">MovieListView</router-link>
         <router-link to="/MovieDetailView">MovieDetail</router-link>
-        <router-link to="/Recommend">Recommendation</router-link>
-        <router-link to="/Community">Community</router-link>
-        <router-link v-show="!isLogin" to="/Login">로그인</router-link>
+        <router-link to="/RecommendView">Recommendation</router-link>
+        <router-link to="/ReviewListView">ReviewListView</router-link>
         <router-link to="/ActorListView">ActorListView</router-link>
+        <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
         <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
       </div>

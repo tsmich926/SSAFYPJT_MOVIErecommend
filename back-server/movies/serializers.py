@@ -36,6 +36,8 @@ class DirectorSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 class ReviewSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
     class Meta:
         model=Review
         fields='__all__'
