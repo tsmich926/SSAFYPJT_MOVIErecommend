@@ -123,13 +123,10 @@ def review_detail(request,review_pk):
 def create_review(request,movie_pk):
     movie=get_object_or_404(Movie,id=movie_pk)
     serializer=ReviewSerializer(data=request.data)
-    # print("useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser")
-    # print(request.user)
-    # print(movie)
-    # print(movie.title)
-    # print(request)
-    # print("useruseruseruseruseruseruseruseruseruseruseruseruseruseruseruseruser")
     if serializer.is_valid(raise_exception=True):
+        # 수정한 내용
+        # serializer.save(user=request.user)
+        # serializer.save(movie=movie) 를 사용하면 오류가 뜸...
         serializer.save(user=request.user, movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
