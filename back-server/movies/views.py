@@ -127,6 +127,7 @@ def create_review(request,movie_pk):
         # 수정한 내용
         # serializer.save(user=request.user)
         # serializer.save(movie=movie) 를 사용하면 오류가 뜸...
+        # 추가로 model에 오타가 난 내용이 pychache에 저장돼 DB가 제대로 생성되지 않아서 수정함.
         serializer.save(user=request.user, movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
 
