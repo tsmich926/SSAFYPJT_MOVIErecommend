@@ -38,6 +38,7 @@ class DirectorSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     movie = MovieSerializer(read_only=True)
     user = UserSerializer(read_only=True)
+    likes=UserSerializer(many=True,read_only=True)
     class Meta:
         model=Review
         fields='__all__'
@@ -102,8 +103,10 @@ class GenreDetailSerializer(serializers.ModelSerializer):
 
 # 리뷰 디테일
 class ReviewDetailSerializer(serializers.ModelSerializer):
+    movie = MovieSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
     comments=CommentSerializer(many=True, read_only=True)
-    like_users=UserSerializer(many=True, read_only=True)
+    likes=UserSerializer(many=True, read_only=True)
     class Meta:
         model=Review
         fields='__all__'

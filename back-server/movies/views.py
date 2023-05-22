@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
-
+from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -17,6 +17,9 @@ from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,Movie
 
 
 # 영화 전체 리스트를 요청하는 것.
+#
+@permission_classes([IsAuthenticated])
+#
 @api_view(['GET'])
 def movie_list(request):
     print(request.GET)
@@ -27,6 +30,9 @@ def movie_list(request):
     return Response(serializer.data)
 
 # 영화를 제목으로 검색
+#
+@permission_classes([IsAuthenticated])
+#
 @api_view(['GET'])
 def movie_title_search_detail(request,movie_title):
     movies=Movie.objects.filter(title__contains=movie_title) 
@@ -39,14 +45,22 @@ def movie_title_search_detail(request,movie_title):
         movies_data = serializer.data
     return Response(movies_data)
 
-# 무비 디테일 (리뷰, 배우, 감독, 포함)
-@api_view(['GET'])
+# 무비 디테일 (리뷰, 배우, 감독, 포함), post 시 좋아요 method
+@permission_classes([IsAuthenticated])
+@api_view(['POST','GET'])
 def movie_detail(request,movie_pk):
     movie=get_object_or_404(Movie,id=movie_pk)
+    if request.method=='POST':
+        if movie.like_users.filter(pk=request.user.pk).exists():
+            movie.like_users.remove(request.user)
+        else:
+            movie.like_users.add(request.user)
     serializer=MovieDetailSerializer(movie)
     return Response(serializer.data)
 
+
 # 전체 배우리스트 요청 (이름, 사진)
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def actor_list(request):
     # actors=Actor.objects.all()[:100]
@@ -55,14 +69,18 @@ def actor_list(request):
     serializer=ActorSerializer(actors,many=True)
     return Response(serializer.data)
 
+
 # 배우 detail
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def actor_detail(request,actor_pk):
     actor=get_object_or_404(Actor,pk=actor_pk)
     serializer=ActorDetailSerializer(actor)
     return Response(serializer.data)
 
+
 # 전체 감독리스트 요청 (이름, 사진)
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def director_list(request):
     page=int(request.GET.get('page'))
@@ -70,14 +88,23 @@ def director_list(request):
     serializer=DirectorSerializer(directors,many=True)
     return Response(serializer.data)
 
-# 감독 detail
-@api_view(['GET'])
+
+# 감독 detail, 좋아요
+@permission_classes([IsAuthenticated])
+@api_view(['GET','POST'])
 def director_detail(request,director_pk):
     director=get_object_or_404(Director,pk=director_pk)
+    if request.method=='POST':
+        if director.like_users.filter(pk=request.user.pk).exists():
+            director.like_users.remove(request.user)
+        else:
+            director.like_users.add(request.user)
     serializer=DirectorDetailSerializer(director)
     return Response(serializer.data)
 
+
 # 전체 장르 요청
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def genre_list(request):
     # actors=Actor.objects.all()
@@ -86,13 +113,21 @@ def genre_list(request):
     return Response(serializer.data)
 
 # 장르 detail
-@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@api_view(['GET','POST'])
 def genre_detail(request,genre_pk):
     genre=get_object_or_404(Genre,pk=genre_pk)
+    if request.method=='POST':
+        if genre.like_users.filter(pk=request.user.pk).exists():
+            genre.like_users.remove(request.user)
+        else:
+            genre.like_users.add(request.user)
     serializer=GenreDetailSerializer(genre)
     return Response(serializer.data)
 
 # 전체 리뷰 조회
+#
+@permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def review_list(request):
     reviews=Review.objects.all()
@@ -101,6 +136,9 @@ def review_list(request):
 
 ################################# 수정 중
 # path('reviews/<int:review_pk>',views.review_detail),
+#
+@permission_classes([IsAuthenticated])
+#
 @api_view(['GET','PUT','DELETE'])
 def review_detail(request,review_pk):
     review=get_object_or_404(Review,pk=review_pk)
@@ -121,7 +159,7 @@ def review_detail(request,review_pk):
 
 # review create 리뷰생성
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
+# @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def create_review(request,movie_pk):
     movie=get_object_or_404(Movie,id=movie_pk)
@@ -133,6 +171,22 @@ def create_review(request,movie_pk):
         # 추가로 model에 오타가 난 내용이 pychache에 저장돼 DB가 제대로 생성되지 않아서 수정함.
         serializer.save(user=request.user, movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
+
+# review 좋아요
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def review_like(request,review_pk):
+    review=get_object_or_404(Review,pk=review_pk)
+    if review.likes.filter(pk=request.user.pk).exists():
+        review.likes.remove(request.user)
+    else:
+        review.likes.add(request.user)
+    serializer=ReviewDetailSerializer(review)
+    return Response(serializer.data)
+
+
+
+
 
 # comment create 댓글생성
 @api_view(['POST'])
