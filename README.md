@@ -91,3 +91,9 @@
 영화에 출연한 배우 목록 표시
 각 배우를 클릭하면 해당 배우의 상세 정보 페이지로 이동
 배우에 하트를 눌러 추후 해당 배우가 출연한 영화를 추천 받을 수 있음.
+
+# ERD
+<img src="https://lab.ssafy.com/soh2254/final_pjt/-/blob/master/erd_readme.png"/>
+
+# UX/UI Figma
+<img src="https://lab.ssafy.com/soh2254/final_pjt/-/blob/master/UX_UI_Figma.png">
