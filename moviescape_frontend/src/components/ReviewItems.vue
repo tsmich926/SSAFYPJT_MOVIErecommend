@@ -22,7 +22,7 @@
         </thead>
         <tbody>
           <div v-for="review in ITEMreviews" :key="review.pk" >
-            <ReviewCard :CARDreview="review"/>
+            <!-- <ReviewCard :CARDreview="review"/> -->
           </div>
         </tbody>
         </table>
@@ -33,25 +33,21 @@
 </template>
 
 <script>
-import ReviewCard from '@/components/ReviewCard.vue'
-
+// import ReviewCard from '@/components/ReviewCard.vue'
 export default {
-  data(){
-      return {
-
-      keyword:'',
-      searchTerm: '',
-      isFocus: false,
-      selectedObj: null
-      }
-
-  },
   name:'ReviewItems',
-  
   components:{
-    ReviewCard
+    // ReviewCard
   },
+  data(){
+    return {
 
+    keyword:'',
+    searchTerm: '',
+    isFocus: false,
+    selectedObj: null
+    }
+  },
   props:{
     ITEMreviews:Array
   },

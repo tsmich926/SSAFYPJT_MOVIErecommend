@@ -30,7 +30,8 @@ export default {
     height:100%;
 }
 .my_backgroundimg{
-  background-image: url('@/assets/Backgroundimg2.jfif');
+  background-image: url('@/assets/Backgroundimg3.jfif');
+  /* background-image: url('@/assets/Not_Found_image/nf2.jfif'); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

@@ -15,7 +15,10 @@ export default new Vuex.Store({
   ],
 
   state: { token:null,
-    movie_id:null
+    movie_id:null,
+    actor_id:null,
+    director_id:null,
+    user:null,
   },
 
   getters: {
@@ -31,6 +34,15 @@ export default new Vuex.Store({
     },
     SAVE_MOVIE_ID(state, movieId) {
       state.movie_id = movieId
+    },
+    SAVE_ACTOR_ID(state, humanId) {
+      state.actor_id = humanId
+    },
+    SAVE_DIRECTOR_ID(state, humanId) {
+      state.director_id = humanId
+    },
+    SAVE_USER(state,User){
+      state.user=User
     }
   },
 
@@ -44,6 +56,7 @@ export default new Vuex.Store({
       .then(res=>{
         console.log(res)
         this.state.token=null
+        this.state.user=null
       })
       .catch(err=>{
         console.log(err)
@@ -60,13 +73,33 @@ export default new Vuex.Store({
         data:{
           username,password
         }
-      })
+        })
         .then((res)=>{
+          console.log(res.data)
           context.commit('SAVE_TOKEN',res.data.key)
+          context.dispatch('SaveUser')
         })
         .catch((err)=>{
           console.log(err)
         })
+    },
+    SaveUser(context){
+      console.log(context)
+      axios({
+        method:'get',
+        url:`${API_URL}/user/my_user/`,
+        headers:{
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+      .then(res=>{
+        console.log("login dataget되는지")
+        console.log(res)
+        context.commit('SAVE_USER',res.data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
     },
     //SignUp
     SignUp(context, payload) {

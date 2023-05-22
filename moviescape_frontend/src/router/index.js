@@ -11,7 +11,8 @@ import MovieListView from '@/views/Movie/MovieListView.vue'
 // Human
 import ActorListView from '@/views/Human/ActorListView.vue'
 import DirectorListView from '@/views/Human/DirectorListView.vue'
-
+import ActorDetailView from '@/views/Human/ActorDetailView.vue'
+import DirectorDetailView from '@/views/Human/DirectorDetailView.vue'
 
 // Review
 import ReviewListView from '@/views/Review/ReviewListView.vue'
@@ -65,6 +66,17 @@ const routes = [
     name: 'DirectorListView',
     component: DirectorListView
   },
+  {
+    path: '/ActorDetailView',
+    name: 'ActorDetailView',
+    component: ActorDetailView
+  },
+  {
+    path: '/DirectorDetailView',
+    name: 'DirectorDetailView',
+    component: DirectorDetailView
+  },
+
 
 
   // ###############

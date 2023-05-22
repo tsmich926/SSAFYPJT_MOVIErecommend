@@ -22,10 +22,12 @@
         <div class="my-wrap">{{movie.overview}}</div>
       </div>
     </div>
-    <div class="row">
-      <HumanListItems :ITEMhumans="movie.directors"/>
+    <div class="row justify-content-center">
+      <h1>영화 감독</h1>
+      <DirectorListItems :ITEMdirectors="movie.directors"/>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
+      <h1>출연 배우</h1>
       <HumanListItems :ITEMhumans="movie.actors"/>
     </div>
     <div class="row">
@@ -42,12 +44,13 @@
 <script>
 import axios from 'axios'
 import HumanListItems from '@/components/HumanListItems.vue'
+import DirectorListItems from '@/components/DirectorListItems.vue'
 // import MovieDetail from '@/components/MovieDetail.vue'
 export default {
   name:'MovieDetailView',
   components:{
-    HumanListItems
-    // MovieDetail
+    HumanListItems,
+    DirectorListItems
   },
   data(){
     return {
@@ -73,6 +76,7 @@ export default {
         }
       })
       .then((res)=>{
+        console.log("movieDetail")
         console.log(res)
         this.movie=res.data
       })

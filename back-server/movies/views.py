@@ -32,7 +32,6 @@ def movie_list(request):
 # 영화를 제목으로 검색
 #
 @permission_classes([IsAuthenticated])
-#
 @api_view(['GET'])
 def movie_title_search_detail(request,movie_title):
     movies=Movie.objects.filter(title__contains=movie_title) 
@@ -126,7 +125,6 @@ def genre_detail(request,genre_pk):
     return Response(serializer.data)
 
 # 전체 리뷰 조회
-#
 @permission_classes([IsAuthenticated])
 @api_view(['GET'])
 def review_list(request):

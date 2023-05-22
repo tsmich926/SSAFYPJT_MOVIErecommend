@@ -2,24 +2,24 @@
   <div class="container justify-content-center">
     <div class="row">
       <!-- <h1>HumanListItems</h1> -->
-        <div class="col" v-for="human in ITEMhumans" :key="human.pk" >
-          <HumanCard :CARDhuman="human"/>
+        <div class="col" v-for="director in ITEMdirectors" :key="director.pk" >
+          <DirectorCard :CARDhuman="director"/>
         </div> 
     </div>
   </div>
 </template>
 
 <script>
-import HumanCard from '@/components/HumanCard.vue'
+import DirectorCard from '@/components/DirectorCard.vue'
 
 export default {
-  name:'HumanListItems',
+  name:'DirectorListItems',
   components:{
-    HumanCard
+    DirectorCard
   },
 
   props:{
-    ITEMhumans:Array
+    ITEMdirectors:Array
   },
   methods:{
 

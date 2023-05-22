@@ -38,7 +38,6 @@ export default {
         name: "MovieDetailView",
         // params: {movie_id:this.CARDmovie.id},
       });
-
     }
   },
   mounted() {

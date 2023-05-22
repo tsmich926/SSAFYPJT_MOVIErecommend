@@ -9,14 +9,17 @@ urlpatterns = [
     path('movies/<int:movie_pk>/',views.movie_detail),
     # movie search & one movie not(detail)
     path('movies/search/<str:movie_title>/',views.movie_title_search_detail),
+
     # actor whole
     path('actors/',views.actor_list),
     # actor detail
     path('actors/<int:actor_pk>/',views.actor_detail),
+
     # director whole
     path('directors/',views.director_list),
-    # director detail
+    # director detail, 좋아요
     path('directors/<int:director_pk>/',views.director_detail),
+    
     # genre whole
     path('genres/',views.genre_list),
     # genre detail

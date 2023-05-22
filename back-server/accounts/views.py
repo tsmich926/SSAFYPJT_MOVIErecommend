@@ -41,5 +41,11 @@ def user_detail(request,user_pk):
     if request.method=='GET':
         serializer=UserSerializer(person)
         return Response(serializer.data)
-
-
+    
+@api_view(['POST','GET'])
+@permission_classes([IsAuthenticated])
+def my_user(request):
+    User=get_user_model()
+    person=User.objects.get(pk=request.user.pk)
+    serializer=UserSerializer(person)
+    return Response(serializer.data)
