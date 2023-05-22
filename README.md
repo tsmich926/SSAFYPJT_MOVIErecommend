@@ -1,92 +1,93 @@
 # final_pjt
 
+# 웹사이트 이름:MOVIESCAPE
+
+# Description
+<방탈출 컨셉의 영화 추천 웹사이트>
+단서를 찾아 방을 탈출하는 방탈출처럼 웹사이트에서 취향에 맞는 영화를 추천받아
+지루한 일상을 탈출하기를 바라는 마음에서 만들었습니다.
 
 
-## Getting started
+# 모델 구성
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+[accounts] 
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+[movies] 
 
-## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+# ERD
 
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/soh2254/final_pjt.git
-git branch -M master
-git push -uf origin master
-```
 
-## Integrate with your tools
+# 화면구성
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/soh2254/final_pjt/-/settings/integrations)
+<라우터>
+- MovieListView
+- MovieDetail
+- Recommendation
+- ReviewListView
+- ActorListView
 
-## Collaborate with your team
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+# 기능
 
-## Test and Deploy
+알고리즘을 활용한 영화 추천
+-유저가 좋아요한 영화 줄거리나 키워드의 유사도를 판별하여 비슷한 영화를 추천
+-유저가 좋아요한 배우나 감독이 출연한 영화를 바탕으로 추천
 
-Use the built-in continuous integration in GitLab.
+전체 리뷰와 상세 리뷰페이지 구성
+전체리뷰: 커뮤니티에서 
+ 
+상세리뷰: MovieDetail을 볼 수 있는 페이지에서 리뷰를 작성하고 다른 사람들이 작성한 리뷰를 볼 수 있도록 함
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+전체 리뷰: 특정 영화를 선택해서  커뮤니티 페이지에 영화에 대한 후기뿐 아니라 자유로운 주제로 게시글을 올릴 수 있도록 함
 
-***
 
-# Editing this README
+# 전체 일정
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+(현재 2023.05.22기준)
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+[완료]
 
-## Name
-Choose a self-explaining name for your project.
+-컨셉설정
+-서비스 기능 구현 목록 작성
+-ERD 작성 및 FIxture data 작성
+-UX&UI 프로토타입 작성(수기)
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+[수정중]
+-프론트엔드 제작
+-백엔드 모델,url,serializer작성
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+[미완료]
+-추천알고리즘 만들기
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+# 프론트엔드 기능 체크리스트
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+영화 목록 페이지 (MovieListView):
+영화 목록을 조회하여 표시
+각 영화에 대한 기본 정보 (제목, 포스터 이미지 등) 표시
+영화를 클릭하면 해당 영화의 상세 페이지로 이동 (MovieDetail)
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+영화 상세 페이지 (MovieDetail):
+선택한 영화의 상세 정보 표시 (제목, 포스터 이미지, 개봉일, 줄거리 등)
+영화에 대한 리뷰 작성 기능 제공
+다른 사람들이 작성한 리뷰 목록 표시
+영화 추천 페이지 
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+영화 추천 페이지 (Recommendation):
+유저의 선호도를 바탕으로 알고리즘을 활용해 유사한 영화 추천
+유저가 좋아요한 영화의 줄거리나 키워드를 분석하여 유사한 영화를 추천
+유저가 좋아하는 배우나 감독이 출연한 영화를 추천
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+커뮤니티(ReviewListView):
+커뮤니티 형식으로 영화에 대한 후기 및 자유로운 주제의 게시글 작성 기능 제공
+다른 사용자들이 작성한 리뷰 목록 표시
+특정 영화를 선택하여 해당 영화에 대한 리뷰를 작성가능
 
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+배우 목록 페이지 (ActorListView):
+영화에 출연한 배우 목록 표시
+각 배우를 클릭하면 해당 배우의 상세 정보 페이지로 이동
+배우에 하트를 눌러 추후 해당 배우가 출연한 영화를 추천 받을 수 있음.
