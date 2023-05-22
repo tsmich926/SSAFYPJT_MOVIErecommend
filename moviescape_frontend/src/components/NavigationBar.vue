@@ -7,7 +7,6 @@
           Moviescape
         </a>
         <router-link :to="{name:'MovieListView'}">MovieListView</router-link>
-        <router-link to="/MovieDetailView">MovieDetail</router-link>
         <router-link to="/RecommendView">Recommendation</router-link>
         <router-link to="/ReviewListView">ReviewListView</router-link>
         <router-link to="/ActorListView">ActorListView</router-link>

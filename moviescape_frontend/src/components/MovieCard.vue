@@ -33,9 +33,10 @@ export default {
     },
     gotoDetail(){
       console.log(this.CARDmovie.id)
+      this.$store.commit('SAVE_MOVIE_ID', this.CARDmovie.id)
       this.$router.push({
         name: "MovieDetailView",
-        params: {movie_id:this.CARDmovie.id},
+        // params: {movie_id:this.CARDmovie.id},
       });
 
     }

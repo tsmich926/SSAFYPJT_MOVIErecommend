@@ -10,11 +10,12 @@ Vue.use(Vuex)
 const API_URL = 'http://127.0.0.1:8000'
 
 export default new Vuex.Store({
-  plulgins: [
+  plugins: [
     createPersistedState(),
   ],
 
-  state: { token:null
+  state: { token:null,
+    movie_id:null
   },
 
   getters: {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state,token){
       state.token = token
       router.push({name:'MovieList'})
+    },
+    SAVE_MOVIE_ID(state, movieId) {
+      state.movie_id = movieId
     }
   },
 

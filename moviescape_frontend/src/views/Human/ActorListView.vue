@@ -37,6 +37,9 @@ export default {
                 url:`http://127.0.0.1:8000/api/v1/actors/`,
                 params:{
                     page:this.page
+                },
+                headers: {
+                    Authorization: `Token ${this.$store.state.token}`
                 }
             })
             .then((res)=>{

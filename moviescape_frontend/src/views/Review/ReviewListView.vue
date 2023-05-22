@@ -1,34 +1,39 @@
 <template>
-  <div>
+  <div class = "reviewlist">
     <p>ReviewListView</p>
-    <div v-for="review in review_list" :key="review.title">
-      <h3>리뷰제목 : {{review.title}}</h3>
+    <!-- <div v-for="review in review_list" :key="review.title"> -->
+      <!-- <h3>리뷰제목 : {{review.title}}</h3>
       <br>
       <h3>리뷰내용 : {{review.content}}</h3>
       <hr>
-      <img :src="`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`" alt="">
-      {{review.likes}}
+      <img :src="`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`" alt=""> -->
+      <!-- {{review.likes}}
       <br>
       {{review.movie.title}}
       <br>
-      {{review.movie.overview}}
+      {{review.movie.overview}} -->
       <hr>
-    </div>
-
-    <div> 
+    <!-- </div> -->
+    <div class="row"> 
       <p>게시글</p>
-      <input type="button" value="게시글 작성" @click="gotoCreateArticle">
+      <!-- <input type="button" value="게시글 작성" @click="gotoCreateArticle"> -->
+      <div class="d-flex">
+        <button class="btn btn-outline-light" type="button" @click="gotoCreateArticle">글쓰기</button>
+      </div>
+      <ReviewItems :ITEMreviews="review_list"/>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import ReviewItems from '@/components/ReviewItems.vue'
+
 export default {
   name:'ReviewListView',
   
   components: { 
-    
+    ReviewItems    
   },
   data(){
     return{
@@ -67,7 +72,7 @@ export default {
 
 
 
-<style>
+<style scoped>
 .btn-save,
 .btn-list {
   width: 200px; /* 원하는 너비 값으로 수정 */
