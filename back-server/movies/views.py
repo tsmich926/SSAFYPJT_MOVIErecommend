@@ -19,7 +19,9 @@ from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,Movie
 # 영화 전체 리스트를 요청하는 것.
 @api_view(['GET'])
 def movie_list(request):
-    movies=Movie.objects.all()[:100]
+    print(request.GET)
+    page=int(request.GET.get('page'))
+    movies=Movie.objects.all()[page*100:(page+1)*100]
     # movies=get_list_or_404(Movie)
     serializer=MovieSerializer(movies,many=True)
     return Response(serializer.data)
