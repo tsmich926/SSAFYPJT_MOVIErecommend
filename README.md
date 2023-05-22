@@ -93,6 +93,7 @@
 배우에 하트를 눌러 추후 해당 배우가 출연한 영화를 추천 받을 수 있음.
 
 # ERD
+<img src="./erd_readme.png">
 ![ERD](https://lab.ssafy.com/soh2254/final_pjt/-/blob/master/erd_readme.png)
 
 # UX/UI Figma
