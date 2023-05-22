@@ -94,7 +94,6 @@
 
 # ERD
 <img src="./erd_readme.png">
-![ERD](https://lab.ssafy.com/soh2254/final_pjt/-/blob/master/erd_readme.png)
 
 # UX/UI Figma
-![ERD](https://lab.ssafy.com/soh2254/final_pjt/-/blob/master/UX_UI_Figma.png)
+<img src="./UX_UI_Figma.png">
