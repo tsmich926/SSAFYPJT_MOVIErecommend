@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="row">
     <h1>HumanListItems</h1>
-      <div v-for="actor in ITEMactors" :key="actor.pk" >
-        <HumanCard :CARDactor="actor"/>
+      <div class="col" v-for="human in ITEMhumans" :key="human.pk" >
+        <HumanCard :CARDhuman="human"/>
       </div> 
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   },
 
   props:{
-    ITEMactors:Array
+    ITEMhumans:Array
   },
   methods:{
 
