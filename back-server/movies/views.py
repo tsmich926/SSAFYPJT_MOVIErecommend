@@ -49,8 +49,9 @@ def movie_detail(request,movie_pk):
 # 전체 배우리스트 요청 (이름, 사진)
 @api_view(['GET'])
 def actor_list(request):
-    actors=Actor.objects.all()[:100]
-    # actors=get_list_or_404(Actor)
+    # actors=Actor.objects.all()[:100]
+    page=int(request.GET.get('page'))
+    actors=get_list_or_404(Actor)[page*100:(page+1)*100]
     serializer=ActorSerializer(actors,many=True)
     return Response(serializer.data)
 
@@ -64,8 +65,8 @@ def actor_detail(request,actor_pk):
 # 전체 감독리스트 요청 (이름, 사진)
 @api_view(['GET'])
 def director_list(request):
-    # actors=Actor.objects.all()
-    directors=get_list_or_404(Director)
+    page=int(request.GET.get('page'))
+    directors=get_list_or_404(Director)[page*100:(page+1)*100]
     serializer=DirectorSerializer(directors,many=True)
     return Response(serializer.data)
 
