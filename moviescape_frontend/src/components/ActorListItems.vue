@@ -2,7 +2,7 @@
   <div class="container justify-content-center">
     <div class="row">
       <!-- <h1>HumanListItems</h1> -->
-        <div class="col" v-for="actor in ITEMactors" :key="actor.id" >
+        <div class="col" v-for="actor in ITEMactors" :key="actor.pk" >
           <ActorCard :CARDhuman="actor"/>
         </div> 
     </div>

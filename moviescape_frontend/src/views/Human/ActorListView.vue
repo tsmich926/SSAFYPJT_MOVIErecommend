@@ -2,7 +2,7 @@
     <div>
         <div>
             <p>ActorListView</p>
-            <ActorListItems :ITEMhumans="actor_list"/>
+            <ActorListItems :ITEMactors="actor_list"/>
         </div>
         <infinite-loading @infinite="getWholeActors"></infinite-loading>
     </div>
@@ -57,9 +57,6 @@ export default {
             })
         }
     },
-    created(){
-        this.getWholeActors()
-    }   
 };
 
 </script>

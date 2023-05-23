@@ -37,6 +37,8 @@ urlpatterns = [
     # comment method에 따라 조회, 삭제, 수정
     path('comments/<int:comment_pk>/',views.review_detail),
     
+    # get rating
+    path('movies/<int:movie_pk>/getrating/',views.get_rating),
     # create rating
     path('movies/<int:movie_pk>/rating/',views.create_rating),
     # comment method에 따라 조회, 삭제, 수정

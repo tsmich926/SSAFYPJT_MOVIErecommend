@@ -1,19 +1,6 @@
 <template>
   <div class = "reviewlist">
-    <p>ReviewListView</p>
-    <!-- <div v-for="review in review_list" :key="review.title"> -->
-      <!-- <h3>리뷰제목 : {{review.title}}</h3>
-      <br>
-      <h3>리뷰내용 : {{review.content}}</h3>
-      <hr>
-      <img :src="`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`" alt=""> -->
-      <!-- {{review.likes}}
-      <br>
-      {{review.movie.title}}
-      <br>
-      {{review.movie.overview}} -->
-      <hr>
-    <!-- </div> -->
+    <hr>
     <div class="row"> 
       <p>게시글</p>
       <!-- <input type="button" value="게시글 작성" @click="gotoCreateArticle"> -->
@@ -54,6 +41,9 @@ export default {
       axios({
         method:'get',
         url:`${API}/api/v1/reviews/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
       })
       .then(res=>{
         console.log(res)

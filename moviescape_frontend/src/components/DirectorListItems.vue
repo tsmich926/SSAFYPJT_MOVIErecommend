@@ -2,7 +2,7 @@
   <div class="container justify-content-center">
     <div class="row">
       <!-- <h1>HumanListItems</h1> -->
-        <div class="col" v-for="director in ITEMdirectors" :key="director.id" >
+        <div class="col" v-for="director in ITEMdirectors" :key="director.pk" >
           <DirectorCard :CARDhuman="director"/>
         </div> 
     </div>

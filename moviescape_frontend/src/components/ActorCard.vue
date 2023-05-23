@@ -1,22 +1,17 @@
 <template>
   <div class="">
-      <div class="my-card-margin">
-          <div class="card" style="width: 18rem;" @mouseenter="zoomInCard" @mouseleave="zoomOutCard" >
-              <img @click="gotoDetail" :src="ImgURL" class="card-img-top" alt="Actor Image" style="height: 27rem;">
-              <div class="card-body">
-              <h5 class="card-name">{{CARDhuman.name}}</h5>
-              <h5>좋아하는 사람 수 : {{LikeCnt}}</h5>
-              <!-- <h5 class="card-name">{{CARDhuman.gender}}</h5> -->
-              <button 
-            type="button" 
-            @click="likeHuman()"
-            class="btn btn-outline-primary"
-          >
-          {{ IsLiked ? '❤': '🤍'}}
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="card my-card-margin" style="width: 18rem;" @mouseenter="zoomInCard" @mouseleave="zoomOutCard">
+        <img @click="gotoDetail" :src="ImgURL" class="card-img-top" alt="Actor Image" style="height: 27rem;">
+        <div class="card-body text-center">
+          <h5 class="card-name">{{CARDhuman.name}}</h5>
+          <h5>좋아하는 사람 수: {{LikeCnt}}</h5>
+          <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
+            {{ IsLiked ? '❤' : '🤍'}}
           </button>
-              </div>
-          </div>
+        </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -25,7 +20,7 @@
 import axios from 'axios';
 import { mapState } from 'vuex';
 export default {
-  name: 'HumanCard',
+  name: 'ActorCard',
   data() {
     return {
       liked: false,
@@ -46,7 +41,7 @@ export default {
       }
     },
     IsLiked(){
-      return this.user.actors.includes(this.CARDhuman.id);
+      return this.user.actors.some(actor => actor.id === this.CARDhuman.id);
     },
     LikeCnt(){
       return this.like_cnt
@@ -68,8 +63,6 @@ export default {
         }
       })
       .then(res=>{
-        console.log("actor확인")
-        console.log(res.data)
         this.director=res.data
         this.like_cnt=res.data.like_users.length
         this.$store.dispatch('SaveUser')
@@ -102,7 +95,7 @@ export default {
     }
   },
   mounted() {
-    this.actor = this.CARDhuman;
+    this.getActor()
   }
 }
 </script>

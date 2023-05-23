@@ -191,6 +191,7 @@ def review_like(request,review_pk):
 
 
 # comment create 댓글생성
+@permission_classes([IsAuthenticated])
 @api_view(['POST'])
 def create_comment(request,review_pk):
     review=get_object_or_404(Review,pk=review_pk)
@@ -201,6 +202,7 @@ def create_comment(request,review_pk):
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     
 # 댓글 수정, 삭제
+@permission_classes([IsAuthenticated])
 @api_view(['PUT','DELETE'])
 def comment_detail(request,comment_pk):
     comment=get_object_or_404(comment,pk=comment_pk)
@@ -215,16 +217,38 @@ def comment_detail(request,comment_pk):
         comment.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+# get rating
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def get_rating(request,movie_pk):
+    movie=get_object_or_404(Movie,pk=movie_pk)
+    rating=Rating.objects.filter(movie=movie,user=request.user)
+    print("요청")
+    print("요청")
+    print("요청")
+    print("요청")
+    print("요청")
+    print("요청")
+    print(rating)
+    if rating.exists():
+        serializer=RatingSerializer(rating,data=request.data)
+        print(rating.first().score)
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
+    else:
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 # rating create 평점생성
+@permission_classes([IsAuthenticated])
 @api_view(['POST'])
 def create_rating(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
     serializer=RatingSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
-        serializer.save(movie=movie)
+        serializer.save(user=request.user,movie=movie)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
+
 # rating 수정, 삭제
+@permission_classes([IsAuthenticated])
 @api_view(['PUT','DELETE'])
 def rating_detail(request,rating_pk):
     rating=get_object_or_404(rating,pk=rating_pk)

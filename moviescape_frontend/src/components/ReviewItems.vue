@@ -1,11 +1,10 @@
 <template>
   <div>
-    <h2>ReviewItems</h2>
-      <div class="searchWrap" >
-            <input type="text" v-model="keyword" @input="setSearchTerm" @keyup.enter="searchReview" /><a href="javascript:;" @click="searchReview" class="btnSearch btn">검색ㅇㅇ</a>
-      <ul>
+    <div class="searchWrap" >
+          <input type="text" v-model="keyword" @input="setSearchTerm" @keyup.enter="searchReview" /><a href="javascript:;" @click="searchReview" class="btnSearch btn">검색</a>
+    <ul>
 
-      </ul>
+    </ul>
   </div>
     <div class="containerbar">
       <!-- <div class="table-responsive"> -->
@@ -22,7 +21,7 @@
         </thead>
         <tbody>
           <div v-for="review in ITEMreviews" :key="review.pk" >
-            <!-- <ReviewCard :CARDreview="review"/> -->
+            <ReviewCard :CARDreview="review"/>
           </div>
         </tbody>
         </table>
@@ -33,11 +32,11 @@
 </template>
 
 <script>
-// import ReviewCard from '@/components/ReviewCard.vue'
+import ReviewCard from '@/components/ReviewCard.vue'
 export default {
   name:'ReviewItems',
   components:{
-    // ReviewCard
+    ReviewCard
   },
   data(){
     return {

@@ -24,7 +24,8 @@ import RecommendView from '@/views/Recommend/RecommendView.vue'
 // Account
 import LoginView from '@/views/Account/LoginView.vue'
 import SignUpView from '@/views/Account/SignUpView.vue'
-
+import UserDetailView from '@/views/Account/UserDetailView.vue'
+import MyDetailView from '@/views/Account/MyDetailView.vue'
 
 //###
 
@@ -113,6 +114,18 @@ const routes = [
     name: 'SignUpView',
     component: SignUpView
   },
+  {
+    path: '/UserDetailView',
+    name: 'UserDetailView',
+    component: UserDetailView
+  },
+  {
+    path: '/MyDetailView',
+    name: 'MyDetailView',
+    component: MyDetailView
+  },
+
+
   // ###############  
 ]
 

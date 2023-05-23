@@ -1,8 +1,8 @@
 <template>
   <div class="">
-      <div class="my-card-margin">
-          <div class="card" style="width: 18rem;" @mouseenter="zoomInCard" @mouseleave="zoomOutCard" >
-              <img @click="gotoDetail" :src="ImgURL" class="card-img-top" alt="Actor Image" style="height: 27rem;">
+    <div class="d-flex justify-content-center align-items-center">
+          <div class="my-card-margin card" style="width: 18rem;" @mouseenter="zoomInCard" @mouseleave="zoomOutCard" >
+              <img @click="gotoDetail" :src="ImgURL" class="card-img-top" alt="Director Image" style="height: 27rem;">
               <div class="card-body">
               <h5 class="card-name">{{CARDhuman.name}}</h5>
               <h5>좋아하는 사람 수 : {{LikeCnt}}</h5>
@@ -16,7 +16,7 @@
           </button>
               </div>
           </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -46,10 +46,12 @@ export default {
       }
     },
     IsLiked(){
-      // console.log("isLiked가 수행됩니다...")
+      // console.log("DirectorList의 isLiked가 수행됩니다...")
       // console.log(this.user.directors.includes(this.CARDhuman.id))
       // console.log(this.user.directors, this.CARDhuman.id)
-      return this.user.directors.includes(this.CARDhuman.id);
+      // console.log(this.user.directors, this.CARDhuman)
+      // console.log("휴먼 아이디",this.CARDhuman.id)
+      return this.user.directors.some(director => director.id === this.CARDhuman.id);
     },
     LikeCnt(){
       return this.like_cnt
@@ -71,9 +73,9 @@ export default {
         }
       })
       .then(res=>{
-        console.log("director확인")
-        console.log(res)
-        console.log(res.data)
+        // console.log("director확인")
+        // console.log(res)
+        // console.log(res.data)
         this.director=res.data
         this.like_cnt=res.data.like_users.length
         this.$store.dispatch('SaveUser')

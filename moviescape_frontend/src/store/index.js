@@ -43,20 +43,23 @@ export default new Vuex.Store({
     },
     SAVE_USER(state,User){
       state.user=User
+    },
+    LOG_OUT(state){
+      state.user=null
+      state.token=null
     }
   },
 
   actions: {
     // logout
-    LogOut(){
+    LogOut(context){
       axios({
         method:'post',
         url:`${API_URL}/accounts/logout/`,        
       })
       .then(res=>{
         console.log(res)
-        this.state.token=null
-        this.state.user=null
+        context.commit('LOG_OUT')
       })
       .catch(err=>{
         console.log(err)

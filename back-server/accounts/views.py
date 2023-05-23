@@ -10,7 +10,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
 from movies.models import Movie,Review,Actor,Director,Genre,Rating,Comment
-from .serializers import UserSerializer
+from .serializers import UserSerializer,UserDetailSerializer
 from movies.serializers import MovieDetailSerializer
 
 #####
@@ -36,10 +36,10 @@ def user_detail(request,user_pk):
                 person.followers.remove(request.user)
             else:
                 person.followers.add(request.user)
-        serializer=UserSerializer(person)
+        serializer=UserDetailSerializer(person)
         return Response(serializer.data)
     if request.method=='GET':
-        serializer=UserSerializer(person)
+        serializer=UserDetailSerializer(person)
         return Response(serializer.data)
     
 @api_view(['POST','GET'])
@@ -47,5 +47,5 @@ def user_detail(request,user_pk):
 def my_user(request):
     User=get_user_model()
     person=User.objects.get(pk=request.user.pk)
-    serializer=UserSerializer(person)
+    serializer=UserDetailSerializer(person)
     return Response(serializer.data)
