@@ -70,10 +70,13 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         fields='__all__'
         # read_only_fields=('actors_settt',)
     like_users=UserSerializer(many=True, read_only=True)
+    genres=GenreSerializer(many=True, read_only=True)
     actors=ActorSerializer(many=True,read_only=True)
     directors=DirectorSerializer(many=True,read_only=True)
     reviews=ReviewSerializer(many=True,read_only=True)
     review_count=serializers.IntegerField(source='reviews.count',read_only=True)
+    ratings=RatingSerializer(many=True,read_only=True)
+    rating_count=serializers.IntegerField(source='ratings.count',read_only=True)
 
 # actors/<int:actor_pk>/
 # 배우 디테일

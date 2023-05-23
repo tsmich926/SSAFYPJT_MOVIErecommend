@@ -30,9 +30,10 @@ from movies.serializers import MovieDetailSerializer
 def user_detail(request,user_pk):
     User=get_user_model()
     person=User.objects.get(pk=user_pk)
+    print(person)
     if request.method=='POST':
         if person != request.user:
-            if person.follower.filter(pk=request.user.pk).exists():
+            if person.followers.filter(pk=request.user.pk).exists():
                 person.followers.remove(request.user)
             else:
                 person.followers.add(request.user)
@@ -42,7 +43,7 @@ def user_detail(request,user_pk):
         serializer=UserDetailSerializer(person)
         return Response(serializer.data)
     
-@api_view(['POST','GET'])
+@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def my_user(request):
     User=get_user_model()

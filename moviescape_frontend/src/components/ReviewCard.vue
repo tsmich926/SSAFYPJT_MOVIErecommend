@@ -2,39 +2,43 @@
   <div class="">
       <tbody>
         <tr>
-          <td class="noBorder">{{CARDreview.id}}</td>
-          <a href="#"><td class="noBorder">{{CARDreview.title }}</td></a>
-          <td class="noBorder">{{CARDreview.content }}</td>
-          <td class="noBorder">{{CARDreview.movie.title }}</td>
-          <td class="noBorder">{{CARDreview.user.username}}</td>
-          <td class="noBorder">{{ formatTime(CARDreview.created_at) }}</td>
+          <td class="noBorder">{{CARDreview.id}}  |</td>
+          <a href="#"><td class="noBorder">  {{CARDreview.title }} </td></a>
+          <td class="noBorder">|  {{CARDreview.content }}  |</td>
+          <td class="noBorder">{{CARDreview.movie.title }}  |  </td>
+          <a href="#" @click="gotoDetail" class="noBorder">{{CARDreview.user.username}}</a>
+          <td class="noBorder">|  {{formatTime(CARDreview.created_at) }}</td>
         </tr>
       </tbody>
   </div>
-    <!-- <p>글 번호</p>
-    <p>글 제목 : {{CARDreview.title }}</p>
-    <p>글 내용:{{CARDreview.content }}</p>
-    <p>영화:{{CARDreview.movie.title }}</p>
-    <p>작성자:{{CARDreview.user.username}}</p>
-    <p>작성시간:{{CARDreview.created_at}}</p> -->
-    <!-- <img :src="`https://image.tmdb.org/t/p/w500/${review.movie.poster_path}`" alt=""> -->
-  
-
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 export default {
   name:'ReviewCard',
   props:{
     CARDreview:Object
   },
+  computed:{
+    ...mapState(['user']),
+  },
   methods: {
     formatTime(time) {
       const date = new Date(time);
       return date.toLocaleString();
-    }
-  }
+    },
+    gotoDetail(){
+      console.log(this.CARDreview.user)
+      if (this.user.username==this.CARDreview.user.username){
+        this.$router.push({name:"MyDetailView"})
+      }
+      else{
+        this.$router.push({name:"UserDetailView"})
+        this.$store.commit('SAVE_USER_ID', this.CARDreview.user.id)
+      }
+    },
+  },
 }
 </script>
 

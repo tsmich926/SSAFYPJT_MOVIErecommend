@@ -8,7 +8,7 @@
   </div>
     <div class="containerbar">
       <!-- <div class="table-responsive"> -->
-        <table class="table">
+        <table class="table my-table ">
           <thead>
           <tr>
             <th scope="col">No</th>
@@ -73,5 +73,13 @@ export default {
 .containerbar {
   background: white;
   padding: 20px;
+  width: 100%;
 }
+.my-table {
+   white-space: nowrap;
+}
+/* .scroll-wrapper > * {
+  margin-right: 10px;
+  white-space: nowrap;
+} */
 </style>

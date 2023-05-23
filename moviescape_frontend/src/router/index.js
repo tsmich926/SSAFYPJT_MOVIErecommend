@@ -7,6 +7,7 @@ import HomeView from '@/views/HomeView.vue'
 // Movie
 import MovieDetailView from '@/views/Movie/MovieDetailView.vue'
 import MovieListView from '@/views/Movie/MovieListView.vue'
+import GenreListView from '@/views/Movie/GenreListView.vue'
 
 // Human
 import ActorListView from '@/views/Human/ActorListView.vue'
@@ -27,7 +28,11 @@ import SignUpView from '@/views/Account/SignUpView.vue'
 import UserDetailView from '@/views/Account/UserDetailView.vue'
 import MyDetailView from '@/views/Account/MyDetailView.vue'
 
+// Recommend, Random
+import RandomProfileVue from '@/components/RandomProfile.vue';
+
 //###
+import TesT from '@/components/TesT.vue'
 
 
 
@@ -53,6 +58,11 @@ const routes = [
     path: '/MovieDetailView',
     name: 'MovieDetailView',
     component: MovieDetailView
+  },
+  {
+    path: '/GenreListView',
+    name: 'GenreListView',
+    component: GenreListView
   },
   // ###############
 
@@ -124,9 +134,23 @@ const routes = [
     name: 'MyDetailView',
     component: MyDetailView
   },
-
+  
+  // #######
+  // Recommend, Random
+  {
+    path: '/RandomProfileVue',
+    name: 'RandomProfileVue',
+    component: RandomProfileVue
+  },
 
   // ###############  
+  // test용 라우터
+  {
+    path: '/TesT',
+    name: 'TesT',
+    component: TesT
+  },
+
 ]
 
 const router = new VueRouter({

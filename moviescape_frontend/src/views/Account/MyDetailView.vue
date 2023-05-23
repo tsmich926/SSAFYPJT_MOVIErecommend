@@ -11,6 +11,9 @@
       <h4>팔로워 수 : {{ user.followers.length }}</h4>
     </div>
     <hr>
+    <button class="btn btn-primary" @click="gotoRandom">뽑기</button>
+    <hr>
+
     <h2>좋아요 한 영화 목록</h2>
     <div class="container">
       <div class="row">
@@ -67,11 +70,13 @@
 import { mapState } from 'vuex';
 import ActorCard from '@/components/ActorCard.vue'
 import DirectorCard from '@/components/DirectorCard.vue'
+
 export default {
   name:'MyDetailView',
   components:{
     ActorCard,
-    DirectorCard
+    DirectorCard,
+
   },
   data(){
     return {
@@ -80,6 +85,11 @@ export default {
   },
   computed:{
     ...mapState(['user'])
+  },
+  methods:{
+    gotoRandom(){
+      this.$router.push({name:"RandomProfileVue"})
+    }
   },
   mounted(){
     console.log("3333")

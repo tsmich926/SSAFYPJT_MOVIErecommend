@@ -222,17 +222,14 @@ def comment_detail(request,comment_pk):
 @api_view(['GET'])
 def get_rating(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
-    rating=Rating.objects.filter(movie=movie,user=request.user)
-    print("요청")
-    print("요청")
-    print("요청")
-    print("요청")
-    print("요청")
-    print("요청")
+    rating = Rating.objects.filter(movie=movie, user=request.user).first()
+
+    print('아니 왜 시발')
     print(rating)
-    if rating.exists():
-        serializer=RatingSerializer(rating,data=request.data)
-        print(rating.first().score)
+    if rating:
+        print("잘 들어왔다")
+        serializer=RatingSerializer(rating)
+        print(rating.score)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     else:
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -242,10 +239,20 @@ def get_rating(request,movie_pk):
 @api_view(['POST'])
 def create_rating(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
-    serializer=RatingSerializer(data=request.data)
-    if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user,movie=movie)
-        return Response(serializer.data,status=status.HTTP_201_CREATED)
+    rating = Rating.objects.filter(movie=movie, user=request.user).first()
+    if rating:
+        print(rating)
+        print(rating.score)
+        print(request.data.get('score'))
+        print(type(request.data['score']))
+        rating.score = request.data.get('score')
+        rating.save()
+        serializer = RatingSerializer(rating)
+    else:
+        serializer = RatingSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user, movie=movie)
+    return Response(serializer.data,status=status.HTTP_201_CREATED)
 
 # rating 수정, 삭제
 @permission_classes([IsAuthenticated])

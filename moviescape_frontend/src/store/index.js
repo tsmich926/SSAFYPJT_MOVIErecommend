@@ -18,6 +18,7 @@ export default new Vuex.Store({
     movie_id:null,
     actor_id:null,
     director_id:null,
+    user_id:null,
     user:null,
   },
 
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     SAVE_USER(state,User){
       state.user=User
+    },
+    SAVE_USER_ID(state,User){
+      state.user_id=User
     },
     LOG_OUT(state){
       state.user=null
