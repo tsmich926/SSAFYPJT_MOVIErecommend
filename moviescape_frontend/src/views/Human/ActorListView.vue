@@ -2,7 +2,7 @@
     <div>
         <div>
             <p>ActorListView</p>
-            <HumanListItems :ITEMhumans="actor_list"/>
+            <ActorListItems :ITEMhumans="actor_list"/>
         </div>
         <infinite-loading @infinite="getWholeActors"></infinite-loading>
     </div>
@@ -11,12 +11,12 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
 import axios from 'axios'
-import HumanListItems from '@/components/HumanListItems.vue'
+import ActorListItems from '@/components/ActorListItems.vue'
 
 export default {
     name:'ActorListView',
     components: {
-        HumanListItems,
+        ActorListItems,
         InfiniteLoading
     },
     data() {

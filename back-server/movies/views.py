@@ -71,12 +71,16 @@ def actor_list(request):
 
 # 배우 detail
 @permission_classes([IsAuthenticated])
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def actor_detail(request,actor_pk):
     actor=get_object_or_404(Actor,pk=actor_pk)
+    if request.method=='POST':
+        if actor.like_users.filter(pk=request.user.pk).exists():
+            actor.like_users.remove(request.user)
+        else:
+            actor.like_users.add(request.user)
     serializer=ActorDetailSerializer(actor)
     return Response(serializer.data)
-
 
 # 전체 감독리스트 요청 (이름, 사진)
 @permission_classes([IsAuthenticated])

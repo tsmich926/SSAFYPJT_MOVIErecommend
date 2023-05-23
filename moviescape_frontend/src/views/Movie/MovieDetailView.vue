@@ -12,6 +12,10 @@
           frameborder="0"></iframe>
       </div>
     </div>
+    <div>
+      <button class="btn btn-primary" @click="likeMovie">좋아요</button>
+      <h4>좋아하는 유저 수 : {{ LikeCnt }}</h4>
+    </div>
     <div class="row my-no-wrap">
       <div class="col">
         <h2 class="my-no-wrap">{{movie.title}}</h2>
@@ -28,7 +32,7 @@
     </div>
     <div class="row justify-content-center">
       <h1>출연 배우</h1>
-      <HumanListItems :ITEMhumans="movie.actors"/>
+      <ActorListItems :ITEMactors="movie.actors"/>
     </div>
     <div class="row">
       <h2>{{movie.genres}}</h2>
@@ -43,13 +47,13 @@
 
 <script>
 import axios from 'axios'
-import HumanListItems from '@/components/HumanListItems.vue'
+import ActorListItems from '@/components/ActorListItems.vue'
 import DirectorListItems from '@/components/DirectorListItems.vue'
 // import MovieDetail from '@/components/MovieDetail.vue'
 export default {
   name:'MovieDetailView',
   components:{
-    HumanListItems,
+    ActorListItems,
     DirectorListItems
   },
   data(){
@@ -58,15 +62,38 @@ export default {
       movie_id:null,
       youtubeEmbed:"https://www.youtube.com/embed/",
       y_key:null,
-      searchList:[]
+      searchList:[],
+      like_cnt:0,
     }
   },
   computed:{
     youtube_key(){
       return this.y_key
+    },
+    LikeCnt(){
+      return this.like_cnt
     }
   },
   methods:{
+    likeMovie() {
+      axios({
+        method:'post',
+        url:`http://127.0.0.1:8000/api/v1/movies/${this.movie_id}/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
+      })
+      .then(res=>{
+        console.log("movie확인")
+        console.log(res.data)
+        this.movie=res.data
+        this.like_cnt=res.data.like_users.length
+        this.$store.dispatch('SaveUser')
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
     getDetailMovies(){ 
       axios({
         method:'get',
@@ -79,6 +106,9 @@ export default {
         console.log("movieDetail")
         console.log(res)
         this.movie=res.data
+        console.log("like_users")
+        console.log(this.movie.like_users)
+        this.like_cnt=this.movie.like_users.length
       })
       .catch(err=>{
         console.log(err)

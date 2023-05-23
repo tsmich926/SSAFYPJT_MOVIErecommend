@@ -2,7 +2,7 @@
     <div>
         <div>
             <p>DirectorListView</p>
-            <HumanListItems :ITEMhumans="director_list"/>
+            <DirectorListItems :ITEMdirectors="director_list"/>
         </div>
         <infinite-loading @infinite="getWholeDirectors"></infinite-loading>
     </div>
@@ -11,12 +11,12 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
 import axios from 'axios';
-import HumanListItems from '@/components/HumanListItems.vue'
+import DirectorListItems from '@/components/DirectorListItems.vue'
 
 export default {
     name:'DirectorListView',
     components: {
-        HumanListItems,
+        DirectorListItems,
         InfiniteLoading
     },
 

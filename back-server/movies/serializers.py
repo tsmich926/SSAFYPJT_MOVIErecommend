@@ -69,6 +69,7 @@ class MovieDetailSerializer(serializers.ModelSerializer):
         model=Movie
         fields='__all__'
         # read_only_fields=('actors_settt',)
+    like_users=UserSerializer(many=True, read_only=True)
     actors=ActorSerializer(many=True,read_only=True)
     directors=DirectorSerializer(many=True,read_only=True)
     reviews=ReviewSerializer(many=True,read_only=True)
