@@ -19,7 +19,6 @@ from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,Movie
 # 영화 전체 리스트를 요청하는 것.
 #
 @permission_classes([IsAuthenticated])
-#
 @api_view(['GET'])
 def movie_list(request):
     print(request.GET)
@@ -197,15 +196,14 @@ def create_comment(request,review_pk):
     review=get_object_or_404(Review,pk=review_pk)
     serializer=CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user)
-        serializer.save(review=review)
+        serializer.save(user=request.user, review=review)
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     
 # 댓글 수정, 삭제
 @permission_classes([IsAuthenticated])
 @api_view(['PUT','DELETE'])
 def comment_detail(request,comment_pk):
-    comment=get_object_or_404(comment,pk=comment_pk)
+    comment=get_object_or_404(Comment,pk=comment_pk)
     # 댓글 수정
     if request.method=='PUT':
         serializer=CommentSerializer(comment,data=request.data)

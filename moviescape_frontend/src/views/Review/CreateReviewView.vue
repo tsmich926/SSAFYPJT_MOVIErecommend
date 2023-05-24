@@ -73,6 +73,15 @@ export default {
       this.searchResults = []
       this.movie_poster = movie.poster_path
     },
+    getPoint(){
+      const point = 20
+
+      const payload = {
+        point
+      }
+
+      this.$store.dispatch('GetPoint',payload)
+    },
     saveArticle() {
       const API = 'http://127.0.0.1:8000'
       const title = this.title
@@ -101,12 +110,12 @@ export default {
       })
         .then((res) => {
           console.log(res)
+          this.getPoint()
           this.$router.push({ name: 'ReviewListView' })
         })
         .catch((err) => {
           console.log(err)
         })
-        
     },
     searchMovie() {
       if (this.SearchTitle) {

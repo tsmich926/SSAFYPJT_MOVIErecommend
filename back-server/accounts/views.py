@@ -25,12 +25,20 @@ from movies.serializers import MovieDetailSerializer
 
 
 # 팔로우, detail
-@api_view(['POST','GET'])
+@api_view(['POST','GET','PUT'])
 @permission_classes([IsAuthenticated])
 def user_detail(request,user_pk):
     User=get_user_model()
     person=User.objects.get(pk=user_pk)
     print(person)
+    if request.method=='PUT':
+        serializer=UserDetailSerializer(person,data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     if request.method=='POST':
         if person != request.user:
             if person.followers.filter(pk=request.user.pk).exists():

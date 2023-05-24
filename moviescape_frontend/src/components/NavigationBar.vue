@@ -2,16 +2,20 @@
   <div>
      <nav class="navbar fixed-nav my_navBar"> <!--//여기에수정 -->
       <div class="scroll-wrapper">
-        <a class="navbar-brand" href="/">
+        <router-link :to="{name:'HomeView'}">
           <img src="@/assets/escape.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
           Moviescape
-        </a>
+        </router-link>
+        <!-- <a class="navbar-brand" href="/">
+          
+        </a> -->
         <router-link :to="{name:'MovieListView'}">MovieListView</router-link>
         <router-link :to="{name:'GenreListView'}">GLV</router-link>
         <router-link to="/RecommendView">Recommendation</router-link>
         <router-link to="/ReviewListView">리뷰</router-link>
         <router-link to="/ActorListView">액터</router-link>
-        <router-link to="/MyDetailView">{{user.username}}</router-link>
+        <router-link v-if="user" to="/MyDetailView">{{user.username}}</router-link>
+        <a>point : {{user.point}}</a>
         <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
         <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
@@ -19,6 +23,7 @@
       </div>
     </nav>
     <router-view />
+    <div class="footer_space"></div>
   </div>
 </template>
 

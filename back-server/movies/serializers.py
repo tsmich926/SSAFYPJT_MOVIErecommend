@@ -46,6 +46,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         # 참조키, movie, user user==request.user로 받아도 됨.
 
 class CommentSerializer(serializers.ModelSerializer):
+    user=UserSerializer(read_only=True)
     class Meta:
         model=Comment
         fields='__all__'
@@ -109,7 +110,7 @@ class GenreDetailSerializer(serializers.ModelSerializer):
 class ReviewDetailSerializer(serializers.ModelSerializer):
     movie = MovieSerializer(read_only=True)
     user = UserSerializer(read_only=True)
-    comments=CommentSerializer(many=True, read_only=True)
+    comment_set=CommentSerializer(many=True, read_only=True)
     likes=UserSerializer(many=True, read_only=True)
     class Meta:
         model=Review

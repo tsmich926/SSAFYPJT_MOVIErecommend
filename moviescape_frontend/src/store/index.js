@@ -55,6 +55,29 @@ export default new Vuex.Store({
   },
 
   actions: {
+    // getpoint
+    GetPoint(context,payload){
+      const point=this.state.user.point+payload.point
+      axios({
+        method:'PUT',
+        url:`${API_URL}/user/${this.state.user.id}/`,
+        data:{
+          point
+        },
+        headers:{
+          Authorization: `Token ${context.state.token}`
+        }
+      })
+      .then(res=>{
+        // console.log("포인트 확인")
+        // console.log(res)
+        alert(`${payload.point} 포인트를 얻었습니다!`)
+        context.commit('SAVE_USER',res.data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
     // logout
     LogOut(context){
       axios({
@@ -64,6 +87,7 @@ export default new Vuex.Store({
       .then(res=>{
         console.log(res)
         context.commit('LOG_OUT')
+        router.push({name:"HomeView"})
       })
       .catch(err=>{
         console.log(err)
@@ -85,9 +109,13 @@ export default new Vuex.Store({
           console.log(res.data)
           context.commit('SAVE_TOKEN',res.data.key)
           context.dispatch('SaveUser')
+          router.push({name:"HomeView"})
         })
         .catch((err)=>{
           console.log(err)
+          if(err.response.status==400){
+            alert("로그인 정보가 올바르지 않습니다!")
+          }
         })
     },
     SaveUser(context){
@@ -118,7 +146,7 @@ export default new Vuex.Store({
         url: `${API_URL}/accounts/signup/`,
         data: {
           username, password1, password2
-        }
+        },
       })
         .then((res) => {
           console.log(res)

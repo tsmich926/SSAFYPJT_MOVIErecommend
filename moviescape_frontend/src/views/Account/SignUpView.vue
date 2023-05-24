@@ -2,23 +2,22 @@
   <div class="login-view">
     <h1>SignUpView</h1>
       <div class="userloginbox">
-        <h2>MOVIESCAPE 회원가입</h2>
       <form v-on:submit.prevent="SignUp">
         <div class="form-group">
-          <input type="text" placeholder="UserName" v-model="username">
+          <input type="text"  class="form-control" placeholder="UserName" v-model="username">
         </div>
         <br>
         <div class="form-group">
-          <input type="text" placeholder="Password" v-model="Password">
+          <input type="password"  class="form-control" placeholder="Password" v-model="password1">
         </div>
         <br>
         <div class="form-group">
-          <input type="submit" placeholder="PasswordConfirm" v-model="password2">
+          <input type="password"  class="form-control" placeholder="PasswordConfirm" v-model="password2">
         </div>
         <br>
         <input type="submit" class="btn btn-primary" value="Sign up">
         <p class="signup-text" >Already have an account?</p>
-          <router-link to="/Login">Login</router-link>
+          <router-link to="/LoginView">Login</router-link>
       </form>
       </div>
     </div>
@@ -39,7 +38,6 @@ export default {
       const username = this.username
       const password1 = this.password1
       const password2 = this.password2
-
       const payload = {
         username,password1,password2
       }
@@ -99,13 +97,10 @@ export default {
 }
 
 .signup-text a {
-  color: #e50914;
+  /* color: #e50914; */
+  color: rgb(248, 47, 98);
   text-decoration: none;
   font-weight: bold;
 }
 
-p {
-  color: black;
-
-}
 </style>

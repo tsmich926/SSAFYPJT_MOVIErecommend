@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '@/store'
 // Home
 import HomeView from '@/views/HomeView.vue'
 
@@ -43,7 +43,7 @@ Vue.use(VueRouter)
 const routes = [
   // Home
   {
-    path: '/',
+    path: '/HomeView',
     name: 'HomeView',
     component: HomeView
   },
@@ -163,6 +163,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to,from,next)=>{
+  const allowAllPages=['LoginView','HomeView','SignUpView']
+  const isLoggedIn=store.getters.isLogin
+  const isAuthRequired=!allowAllPages.includes(to.name)
+  if (isAuthRequired &&! isLoggedIn){
+    // console.log('Login으로 이동!')
+    alert('Login을 해주세요!')
+    next({name:'LoginView'})
+  }else{
+    // console.log('to로 이동!')
+    next()
+  }
 })
 
 export default router

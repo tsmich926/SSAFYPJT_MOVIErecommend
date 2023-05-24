@@ -9,6 +9,7 @@
     <div class="footer_wrapper">
       <AppFooter />
     </div>
+    <div class="footer_space"></div>
   </div>
 </template>
 
@@ -66,7 +67,10 @@ export default {
 .nav_space {
   height: 56px;
 }
-
+.footer_space{
+  display: flex;
+  height:80px;
+}
 
 .footer_wrapper {
   position: fixed;

@@ -35,14 +35,14 @@ urlpatterns = [
     # create comment
     path('movies/<int:review_pk>/comment/',views.create_comment),
     # comment method에 따라 조회, 삭제, 수정
-    path('comments/<int:comment_pk>/',views.review_detail),
+    path('comments/<int:comment_pk>/',views.comment_detail),
     
     # get rating
     path('movies/<int:movie_pk>/getrating/',views.get_rating),
     # create rating
     path('movies/<int:movie_pk>/rating/',views.create_rating),
-    # comment method에 따라 조회, 삭제, 수정
-    path('ratings/<int:rating_pk>/',views.review_detail),
+    # raiting method에 따라 조회, 삭제, 수정
+    path('ratings/<int:rating_pk>/',views.rating_detail),
 
 
 ]
