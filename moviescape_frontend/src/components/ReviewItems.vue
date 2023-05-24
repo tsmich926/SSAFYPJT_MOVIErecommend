@@ -18,11 +18,9 @@
             <th scope="col">작성자</th>
             <th scope="col">작성시간</th>
           </tr>
-        </thead>
+          </thead>
         <tbody>
-          <div v-for="review in ITEMreviews" :key="review.pk" >
-            <ReviewCard :CARDreview="review"/>
-          </div>
+          <ReviewCard v-for="review in ITEMreviews" :key="review.pk" :CARDreview="review"/>          
         </tbody>
         </table>
       </div>
@@ -32,6 +30,7 @@
 </template>
 
 <script>
+
 import ReviewCard from '@/components/ReviewCard.vue'
 export default {
   name:'ReviewItems',
@@ -76,7 +75,7 @@ export default {
   width: 100%;
 }
 .my-table {
-   white-space: nowrap;
+  white-space: nowrap;
 }
 /* .scroll-wrapper > * {
   margin-right: 10px;

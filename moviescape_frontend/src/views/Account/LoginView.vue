@@ -11,10 +11,9 @@
         </div>
         <br>
         <input type="submit" class="btn btn-primary" value="Login">
-        <p class="signup-text">don't have an account?
+        <p class="signup-text">don't have an account?</p>
           <router-link to="/SignUpView">signup</router-link>
           <!-- <a href="javascript:void(0);" @click="toggleForm">Sign up</a> -->
-        </p>
       </form>
     </div>
   </div>
@@ -95,6 +94,7 @@ export default {
   border: none;
   border-radius: 4px;
   background-color: #063308;
+  /* background: rgb(248, 47, 98); */
   color: #fff;
   cursor: pointer;
 }
@@ -106,7 +106,8 @@ export default {
 }
 
 .signup-text a {
-  color: #e50914;
+  /* color: #e50914; */
+  color: rgb(248, 47, 98);
   text-decoration: none;
   font-weight: bold;
 }

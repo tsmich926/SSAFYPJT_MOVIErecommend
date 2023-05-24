@@ -17,15 +17,15 @@ class Director(models.Model):
     # id=models.IntegerField(unique=True,primary_key=True)
     name=models.CharField(max_length=100)
     profile_path=models.TextField(null=True)
-   
-   
+
+
     # likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
 
 class Genre(models.Model):
     # id=models.IntegerField(unique=True,primary_key=True)
     name=models.CharField(max_length=100)
-   
-   
+
+
     # likes=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)
 
 class Movie(models.Model):

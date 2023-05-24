@@ -1,18 +1,26 @@
 <template>
-  <div class="usersignupbox">
+  <div class="login-view">
     <h1>SignUpView</h1>
+      <div class="userloginbox">
+        <h2>MOVIESCAPE 회원가입</h2>
       <form v-on:submit.prevent="SignUp">
-        <h2>Create an account</h2>
-        <input type="text" placeholder="UserName" v-model="username">
-        <hr>
-        <input type="password" placeholder="Password" v-model="password1">
-        <hr>
-        <input type="password" placeholder="PasswordConfirm" v-model="password2">
-        <input type="submit" value="Sign up">
-        <p>Already have an account?
+        <div class="form-group">
+          <input type="text" placeholder="UserName" v-model="username">
+        </div>
+        <br>
+        <div class="form-group">
+          <input type="text" placeholder="Password" v-model="Password">
+        </div>
+        <br>
+        <div class="form-group">
+          <input type="submit" placeholder="PasswordConfirm" v-model="password2">
+        </div>
+        <br>
+        <input type="submit" class="btn btn-primary" value="Sign up">
+        <p class="signup-text" >Already have an account?</p>
           <router-link to="/Login">Login</router-link>
-        </p>
       </form>
+      </div>
     </div>
 </template>
 
@@ -41,6 +49,63 @@ export default {
 }
 </script>
 
-<style>
 
+<style scoped>
+.login-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+.userloginbox {
+  width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid hsl(0, 30%, 92%);
+  border-radius: 4px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #063308;
+  /* background: rgb(248, 47, 98); */
+  color: #fff;
+  cursor: pointer;
+}
+
+.signup-text {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.signup-text a {
+  color: #e50914;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+p {
+  color: black;
+
+}
 </style>

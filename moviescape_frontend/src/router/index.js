@@ -18,6 +18,7 @@ import DirectorDetailView from '@/views/Human/DirectorDetailView.vue'
 // Review
 import ReviewListView from '@/views/Review/ReviewListView.vue'
 import CreateReviewView from '@/views/Review/CreateReviewView.vue'
+import ReviewDetailView from '@/views/Review/ReviewDetailView.vue'
 
 // Recommend
 import RecommendView from '@/views/Recommend/RecommendView.vue'
@@ -55,9 +56,9 @@ const routes = [
     component: MovieListView
   },
   {
-    path: '/MovieDetailView',
+    path: '/MovieDetailView/:id',
     name: 'MovieDetailView',
-    component: MovieDetailView
+    component: MovieDetailView,
   },
   {
     path: '/GenreListView',
@@ -102,6 +103,11 @@ const routes = [
     path: '/CreateReviewView',
     name: 'CreateReviewView',
     component: CreateReviewView
+  },
+  {
+    path: '/ReviewDetailView/:id',
+    name: 'ReviewDetailView',
+    component: ReviewDetailView
   },
   // ###############
 

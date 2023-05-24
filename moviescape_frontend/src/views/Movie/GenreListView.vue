@@ -1,7 +1,13 @@
 <template>
-  <div class= "my_MovieListView_BGC">
+  <!-- <div class= "my_MovieListView_BGC">
     <h1>내가 선호하는 장르 목록</h1>
     <div v-for="genre in Genres" :key="genre.id">
+      <GenreItems :Genre="genre"/>
+    </div>
+  </div> -->
+  <div class= "my_MovieListView_BGC">
+    <h1>내가 선호하는 장르 목록</h1>
+    <div  v-for="genre in Genres" :key="genre.id" >
       <GenreItems :Genre="genre"/>
     </div>
   </div>
@@ -17,7 +23,7 @@ export default {
   },
   data(){
     return {
-      genres:[],
+        genres: [ ],
     }
   },
   computed:{

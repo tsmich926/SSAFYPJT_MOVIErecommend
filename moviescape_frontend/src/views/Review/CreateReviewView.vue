@@ -17,7 +17,7 @@
               <input
                 type="button"
                 @click="searchMovie"
-                class="search-button"
+                class="btn btn-primary"
                 value="검색"
               />
             </div>
@@ -231,5 +231,15 @@ textarea {
   object-fit: cover;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+  background-color: #222;
+  border-color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #fff;
+  color: #222;
 }
 </style>

@@ -7,11 +7,11 @@
           Moviescape
         </a>
         <router-link :to="{name:'MovieListView'}">MovieListView</router-link>
-        <router-link :to="{name:'GenreListView'}">GenreListView</router-link>
+        <router-link :to="{name:'GenreListView'}">GLV</router-link>
         <router-link to="/RecommendView">Recommendation</router-link>
-        <router-link to="/ReviewListView">ReviewListView</router-link>
-        <router-link to="/ActorListView">ActorListView</router-link>
-        <router-link to="/MyDetailView">MyPage</router-link>
+        <router-link to="/ReviewListView">리뷰</router-link>
+        <router-link to="/ActorListView">액터</router-link>
+        <router-link to="/MyDetailView">{{user.username}}</router-link>
         <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
         <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import MovieSearchItems from '@/components/MovieSearchItems.vue';
 export default {
   name: "NavigationBar",
@@ -30,6 +31,7 @@ export default {
     MovieSearchItems,
   },
   computed: {
+    ...mapState(['user']),
     isLogin() {
       return this.$store.getters.isLogin;
     }
@@ -42,7 +44,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 /* overflow-x: auto; */
 #navbar-container {
   width: 100%;
@@ -62,6 +64,13 @@ nav a.router-link-exact-active {
   justify-content: center;
   align-content: center;
   text-align: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 95%;
+  margin-top: auto;
+  z-index: 9999;
+  background-color:black;
 }
 
 .scroll-wrapper {

@@ -1,18 +1,33 @@
 <template>
   <div>
-    <input type="text" v-model="title" @input="getMovie">
-    <button @click="toNull">초기화</button>
-    <div class="my-absolute-position">
-      <div class="" v-for="movie in movies" :key="movie.pk">
-       <div>
-          <h3>
-            <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="">
-          </h3>
-          <h3>{{movie.title}}</h3>
-        </div>
+    <div class="search-wrapper">
+      <div class="search-input-container">
+        <input
+          type="text"
+          @keyup.enter="searchMovie"
+          v-model.trim="SearchTitle"
+          class="search-input"
+          placeholder="영화를 검색하세요"
+          style="width:100%;"
+        />
+        <input
+          type="button"
+          @click="searchMovie"
+          class="search-button"
+          value="검색"
+        />
       </div>
+      <div class="here">
+        <img v-if="this.movie_id" :src="`https://image.tmdb.org/t/p/w500/${movie_poster_path}`" style="height:50px;" alt="">
+      </div>
+      <ul v-if="showResults" class="search-results">
+        <li v-for="movie in searchResults" :key="movie.id" class="search-result-item">
+          <div @click="gotoDetail(movie)" class="search-result-item-title">{{ movie.title }}
+            <img :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" style="width:50px; height: 70px;" alt="">
+          </div>
+        </li>
+      </ul>
     </div>
-
   </div>
 </template>
 
@@ -21,36 +36,70 @@ import axios from 'axios';
 export default {
   name:'MovieSearchItems',
   data(){
-    return{
-      title:null,
-      movie_list:null,
+    return {
+      content: null,
+      title: null,
+      SearchTitle: null,
+      searchResults: [],
+      showResults: false,
+      movie_id: null,
+      movie_poster: null,
     }
   },
   methods:{
-    getMovie(){
-      const title=this.title
-      axios({
-        method:'get',
-        url:`http://127.0.0.1:8000/api/v1/movies/search/${title}/`,
-        headers:{
-          Authorization: `Token ${this.$store.state.token}`
-        }
-      })
-      .then(res=> {
-        console.log(res)
-        this.movie_list=res.data
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+    searchMovie() {
+      if (this.SearchTitle) {
+        const title = this.SearchTitle;
+        axios({
+          method: 'get',
+          url: `http://127.0.0.1:8000/api/v1/movies/search/${title}/`,
+          headers: {
+            Authorization: `Token ${this.$store.state.token}`
+          }
+        })
+          .then((res) => {
+            console.log("########입력")
+            console.log(res)
+            if (res.data.length<3){
+              this.searchResults = res.data;
+              this.showResults = true; // 검색 결과를 표시합니다
+            }else{
+              this.searchResults=[]
+              for(let i=0; i<3; i++){
+                this.searchResults.push(res.data[i]);
+                this.showResults = true;
+              }
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
     toNull(){
-      this.title=null
+      this.SearchTitle=null
+    },
+    gotoDetail(movie){
+      const currentRoute = this.$router.currentRoute
+
+      console.log("실험this.searchTitle")
+      console.log(this.SearchTitle)
+      // 현재 경로와 목표 경로가 동일한지 확인
+      if (currentRoute.path !== `/MovieDetailView/${movie.id}`) {
+        this.$store.commit('SAVE_MOVIE_ID', movie.id)
+        this.SearchTitle=null
+        console.log(this.SearchTitle)
+        this.searchResults=[]
+        this.$router.push(`/MovieDetailView/${movie.id}`)
+      }
     }
   },
-  computed:{
-    movies(){
+  computed: {
+    movies() {
       return this.movie_list
+    },
+    movie_poster_path() {
+      return this.movie_poster
     }
   }
 

@@ -2,10 +2,10 @@
   <div id="app" class="my_backgroundimg">
     <div class="nav_space"></div>
     <div class="my_content">
-      <h1>Moviescape</h1>
-      <h5>사용자 : {{user.username}}</h5>
-      <NavigationBar />
-    </div>
+      <div>
+        <NavigationBar />
+      </div>
+      </div>
     <div class="footer_wrapper">
       <AppFooter />
     </div>
@@ -48,11 +48,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  /* pointer-events: none; */
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+
   min-height: 100vh;
 }
 
 .my_content {
   max-width: 80%;
+  max-height:80%;
   text-align: center;
 }
 
@@ -60,8 +67,12 @@ export default {
   height: 56px;
 }
 
+
 .footer_wrapper {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 95%;
   margin-top: auto;
-  min-width: 100%;
 }
 </style>

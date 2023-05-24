@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>MovieListItems</h1>
     <div class="container text-center">
       <div class="row">
         <div class="col" v-for="movie in ITEMmovies" :key="movie.pk" >

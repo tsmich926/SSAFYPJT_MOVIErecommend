@@ -223,8 +223,6 @@ def comment_detail(request,comment_pk):
 def get_rating(request,movie_pk):
     movie=get_object_or_404(Movie,pk=movie_pk)
     rating = Rating.objects.filter(movie=movie, user=request.user).first()
-
-    print('아니 왜 시발')
     print(rating)
     if rating:
         print("잘 들어왔다")

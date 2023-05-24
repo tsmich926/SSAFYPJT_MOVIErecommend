@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-      <tbody>
+  <tr>
+      <!-- <tbody>
         <tr>
           <td class="noBorder">{{CARDreview.id}}  |</td>
           <a href="#"><td class="noBorder">  {{CARDreview.title }} </td></a>
@@ -9,8 +9,19 @@
           <a href="#" @click="gotoDetail" class="noBorder">{{CARDreview.user.username}}</a>
           <td class="noBorder">|  {{formatTime(CARDreview.created_at) }}</td>
         </tr>
-      </tbody>
-  </div>
+      </tbody> -->
+
+    <td >{{ CARDreview.id }}</td>
+    <td >
+      <a href="#" @click="gotoReviewDetail">{{ CARDreview.title }}</a>
+    </td>
+    <td > {{ CARDreview.content }} </td>
+    <td >{{ CARDreview.movie.title }} </td>
+    <td >
+      <a href="#" @click="gotoDetail">{{ CARDreview.user.username }}</a>
+    </td>
+    <td > {{ formatTime(CARDreview.created_at) }}</td>
+  </tr>
 </template>
 
 <script>
@@ -38,6 +49,9 @@ export default {
         this.$store.commit('SAVE_USER_ID', this.CARDreview.user.id)
       }
     },
+    gotoReviewDetail(){
+      this.$router.push(`/ReviewDetailView/${this.CARDreview.id}`)
+    }
   },
 }
 </script>

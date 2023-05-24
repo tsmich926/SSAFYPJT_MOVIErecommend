@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Home View</h1>
     <iframe id="inlineFrameExample"
     title="Inline Frame Example"
     width="600"

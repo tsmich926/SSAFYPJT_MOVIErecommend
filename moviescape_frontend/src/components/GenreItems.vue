@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button class="btn btn-danger">{{Genre.name}}</button>
+  <div class="col">
+    <button class="btn btn-danger ">{{Genre.name}}</button>
   </div>
 </template>
 
@@ -17,6 +17,16 @@ export default {
 }
 </script>
 
-<style>
 
+<style scoped>
+
+.genre-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 </style>

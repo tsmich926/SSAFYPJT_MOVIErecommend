@@ -33,6 +33,9 @@ export default {
     },
     methods: {
         getWholeDirectors($state){
+            if (window.innerHeight + window.pageYOffset < document.body.offsetHeight - 300) {
+                return  // 스크롤이 맨 밑에 닿기 전에 300px 이상 위에서는 호출하지 않음
+            } 
             axios({
                 method:'get',
                 url:`http://127.0.0.1:8000/api/v1/directors/`,

@@ -1,5 +1,5 @@
 <template>
-    <div :class="['bg-secondary', 'card', 'my-card', { 'special-card': isSpecial }]" @click="gotoDetail">
+    <div :class="['bg-secondary', 'card', 'my-card', { 'special-card': isSpecial }]" @click="gotoDetail(CARDmovie)">
       <div class="image-container">
         <img :src="`https://image.tmdb.org/t/p/w500/${CARDmovie.poster_path}`" class="card-img-top my-card-img" alt="...">
       </div>
@@ -31,13 +31,12 @@ export default {
       // 특정 조건을 체크하고 isSpecial 값을 변경하는 로직을 구현합니다
       // 예를 들어, 특정 조건이 충족되면 this.isSpecial = true; 로 변경할 수 있습니다
     },
-    gotoDetail(){
-      console.log(this.CARDmovie.id)
-      this.$store.commit('SAVE_MOVIE_ID', this.CARDmovie.id)
-      this.$router.push({
-        name: "MovieDetailView",
-        // params: {movie_id:this.CARDmovie.id},
-      });
+    gotoDetail(movie){
+      // this.$store.commit('SAVE_MOVIE_ID', movie.id)
+      const movieId = movie.id; // 이동할 영화의 ID를 동적으로 설정할 수 있음
+      // console.log("MovieCard")
+      // console.log(movieId)
+      this.$router.push({ name: 'MovieDetailView', params: { id: movieId } });
     }
   },
   mounted() {
@@ -66,16 +65,16 @@ export default {
 
 img:hover{
   /* animation : 효과(@keyframes 이름) 동작시간 */
-	animation: fadeout 1s;
+    animation: fadeout 1s;
 }
 @keyframes fadeout {
 /* 효과를 동작시간 동안 0 ~ 1까지 */
-	from {
-		opacity: 0.5;
-	}
-	to {
-		opacity: 0;
-	}
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 0;
+    }
 }
 .my-card-img{
   width:100%;
