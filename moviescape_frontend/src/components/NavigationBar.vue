@@ -14,7 +14,9 @@
         <router-link to="/RecommendView">Recommendation</router-link>
         <router-link to="/ReviewListView">리뷰</router-link>
         <router-link to="/HumanListView">출연진</router-link>
-        <router-link v-if="user" to="/MyDetailView">{{user.username}}</router-link>
+        <router-link v-if="user" to="/MyDetailView">
+          <img style="height: 40px;"  type="circle" :src="`${UserProfile}`" alt=""> &nbsp; {{user.username}}
+        </router-link>
         <a v-if="user">point : {{user.point}}</a>
         <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
@@ -39,7 +41,14 @@ export default {
     ...mapState(['user']),
     isLogin() {
       return this.$store.getters.isLogin;
-    }
+    },
+    UserProfile(){
+      if (this.user.profile_path=='default'){
+        return 'http://localhost:8080/user/default.png'
+      }else{
+        return this.user.profile_path
+      }
+    },
   },
   methods: {
     LogOut() {
@@ -62,7 +71,7 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #cee2c5;
+  color: #008080;
 }
 
 .my_navBar {

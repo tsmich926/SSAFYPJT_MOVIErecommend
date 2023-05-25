@@ -1,7 +1,12 @@
 <template>
   <div class="">
     <div class="comment-header">
-      <span class="comment-author" @click="gotoUserDetail" ref="authorSpan" @mouseover="setCursor('pointer')" @mouseout="setCursor('auto')">{{ Comment.user.username }}</span>
+      <span class="comment-author" @click="gotoUserDetail" ref="authorSpan" @mouseover="setCursor('pointer')" @mouseout="setCursor('auto')">{{ Comment.user.username }}
+  
+        <img style="height: 40px;"  type="circle" :src="`${CommentUserProfile}`" alt="">
+      </span>
+      <span>
+      </span>
       <span class="comment-date">{{ formatDate(Comment.created_at) }}</span>
     </div>
     <div class="comment-content">
@@ -46,6 +51,13 @@ export default {
   },
   computed: {
     ...mapState(['user']),
+    CommentUserProfile(){
+      if (this.Comment.user.profile_path=='default'){
+        return 'http://localhost:8080/user/default.png'
+      }else{
+        return this.Comment.user.profile_path
+      }
+    },
     myComment() {
       return this.user.username == this.Comment.user.username;
     },

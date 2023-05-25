@@ -75,9 +75,9 @@ export default {
     },
     getPoint(){
       const point = 20
-
+      const profile_path='default'
       const payload = {
-        point
+        point,profile_path
       }
 
       this.$store.dispatch('GetPoint',payload)

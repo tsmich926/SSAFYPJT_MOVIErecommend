@@ -5,7 +5,7 @@ from movies.models import Director,Actor,Movie,Genre
 # Create your models here.
 class User(AbstractUser):
     point = models.IntegerField(default=0)
-    profile_path = models.TextField(default="default.png", null=True)
+    profile_path = models.TextField(default="default", null=True)
     theme= models.CharField(default="default",max_length=50)
     
     followings=models.ManyToManyField('self',symmetrical=False, related_name='followers')

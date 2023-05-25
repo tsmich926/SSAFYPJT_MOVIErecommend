@@ -8,13 +8,13 @@
             <div height="62" type="circle" width="62" class="custom-1dm77tq">
               <img  @click="gotoDetail" alt="배우 이미지" :src="ImgURL" class="custom-1mxmenj" >
             </div>
-          <div class="custom-11zhy3w">
-            <div class="custom-15vtjyx">{{CARDhuman.name}}</div>
-            <div class="custom-hbs6kl-AccessoryModule">감독</div>
-                      <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
-            {{ IsLiked ? '❤' : '🤍'}}
-          </button>
-          </div>
+            <div class="custom-11zhy3w">
+              <div class="custom-15vtjyx">{{CARDhuman.name}}</div>
+              <div class="custom-hbs6kl-AccessoryModule">감독</div>
+              <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
+              {{ IsLiked ? '❤' : '🤍'}}
+              </button>
+            </div>
           </div>
         </div>
         </a>

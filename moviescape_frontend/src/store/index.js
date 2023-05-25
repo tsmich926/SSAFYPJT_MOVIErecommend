@@ -59,11 +59,12 @@ export default new Vuex.Store({
     // getpoint
     GetPoint(context,payload){
       const point=this.state.user.point+payload.point
+      const profile_path=payload.profile_path
       axios({
         method:'PUT',
         url:`${API_URL}/user/${this.state.user.id}/`,
         data:{
-          point
+          point,profile_path
         },
         headers:{
           Authorization: `Token ${context.state.token}`

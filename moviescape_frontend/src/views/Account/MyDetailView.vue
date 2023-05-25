@@ -24,7 +24,33 @@
         </li>
       </ul>
     </div>
-
+    <div class="liked-movies">
+      <h3>좋아요한 장르 </h3>
+      <ul class="row">
+        <li>
+          <button  @click="like_genre(1)" class="btn my-btn" value="1">전체</button>
+          <button  @click="like_genre(28)" class="btn my-btn" value="28">액션</button>
+          <button  @click="like_genre(12)" class="btn my-btn" value="12">모험</button>
+          <button  @click="like_genre(16)" class="btn my-btn" value="16">애니메이션</button>
+          <button  @click="like_genre(35)" class="btn my-btn" value="35">코미디</button>
+          <button  @click="like_genre(80)" class="btn my-btn" value="80">범죄</button>
+          <button  @click="like_genre(99)" class="btn my-btn" value="99">다큐멘터리</button>
+          <button  @click="like_genre(18)" class="btn my-btn" value="18">드라마</button>
+          <button  @click="like_genre(10751)" class="btn my-btn" value="10751">가족</button>
+          <button  @click="like_genre(14)" class="btn my-btn" value="14">판타지</button>
+          <button  @click="like_genre(36)" class="btn my-btn" value="36">역사</button>
+          <button  @click="like_genre(27)" class="btn my-btn" value="27">공포</button>
+          <button  @click="like_genre(10402)" class="btn my-btn" value="10402">음악</button>
+          <button  @click="like_genre(9648)" class="btn my-btn" value="9648">미스터리</button>
+          <button  @click="like_genre(10749)" class="btn my-btn" value="10749">로맨스</button>
+          <button  @click="like_genre(878)" class="btn my-btn" value="878">SF</button>
+          <button  @click="like_genre(10770)" class="btn my-btn" value="10770">TV 영화</button>
+          <button  @click="like_genre(53)" class="btn my-btn" value="53">스릴러</button>
+          <button  @click="like_genre(10752)" class="btn my-btn" value="10752">전쟁</button>
+          <button  @click="like_genre(37)" class="btn my-btn" value="37">서부</button>
+        </li>
+      </ul>
+    </div>
     <div class="liked-actors">
       <h4>좋아요한 영화배우 </h4>
       <ul class="row">
@@ -71,6 +97,9 @@ export default {
   methods: {
     gotoRandom(){
       this.$router.push({name:"RandomProfileVue"})
+    },
+    like_genre(genre_id){
+      console.log(genre_id)
     }
   },
   mounted(){
