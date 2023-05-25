@@ -37,7 +37,7 @@ export default {
         return this.user.theme;
         // return 'Backgroundimg2';
       }
-      return 'Backgroundimg3';
+      return 'default';
     },
   },
   methods:{

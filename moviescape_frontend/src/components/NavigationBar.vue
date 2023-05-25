@@ -9,16 +9,16 @@
         <!-- <a class="navbar-brand" href="/">
           
         </a> -->
-        <router-link :to="{name:'MovieListView'}">영화</router-link>
+        <router-link class="rout-bar" :to="{name:'MovieListView'}">영화</router-link>
         <!-- <router-link :to="{name:'GenreListView'}">GLV</router-link> -->
-        <router-link to="/RecommendView">Recommendation</router-link>
-        <router-link to="/ReviewListView">리뷰</router-link>
-        <router-link to="/HumanListView">출연진</router-link>
+        <router-link class="rout-bar" to="/RecommendView">Recommendation</router-link>
+        <router-link class="rout-bar" to="/ReviewListView">리뷰</router-link>
+        <router-link class="rout-bar" to="/HumanListView">출연진</router-link>
         <router-link v-if="user" to="/MyDetailView">
-          <img style="height: 40px;"  type="circle" :src="`${UserProfile}`" alt=""> &nbsp; {{user.username}}
+          <img class="profile-image"  type="circle" :src="`${UserProfile}`" alt=""> &nbsp; {{user.username}}
         </router-link>
         <a v-if="user">point : {{user.point}}</a>
-        <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
+        <router-link class="rout-bar" v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
         <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
         <MovieSearchItems/>
@@ -59,6 +59,18 @@ export default {
 </script>
 
 <style>
+.rout-bar{
+  border: solid white 1px;
+  border-radius: 3px;
+  padding:10px;
+}
+.profile-image {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 5px;
+}
 /* overflow-x: auto; */
 #navbar-container {
   width: 100%;
@@ -71,7 +83,14 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #008080;
+  background-color:#303133;
+  color: rgb(255, 90, 0);
+  /* border: solid #008080 1px; */
+  /* color: #008080; */
+  /* border: solid rgb(255, 90, 0) 1px; */
+  border: solid white 1px;
+  border-radius: 3px;
+  padding:10px;
 }
 
 .my_navBar {

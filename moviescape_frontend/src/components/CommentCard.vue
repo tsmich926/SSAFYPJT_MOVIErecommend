@@ -3,7 +3,7 @@
     <div class="comment-header">
       <span class="comment-author" @click="gotoUserDetail" ref="authorSpan" @mouseover="setCursor('pointer')" @mouseout="setCursor('auto')">{{ Comment.user.username }}
   
-        <img style="height: 40px;"  type="circle" :src="`${CommentUserProfile}`" alt="">
+        <img class="profile-circle" :src="`${CommentUserProfile}`" alt="">
       </span>
       <span>
       </span>
@@ -147,6 +147,14 @@ export default {
 </script>
 
 <style scoped>
+.profile-circle{
+    height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 5px;
+
+}
 .comment-board {
   background-color: black;
   color: white;

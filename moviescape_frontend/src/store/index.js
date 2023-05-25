@@ -64,7 +64,8 @@ export default new Vuex.Store({
         method:'PUT',
         url:`${API_URL}/user/${this.state.user.id}/`,
         data:{
-          point,profile_path
+          point,
+          profile_path
         },
         headers:{
           Authorization: `Token ${context.state.token}`
@@ -73,7 +74,11 @@ export default new Vuex.Store({
       .then(res=>{
         // console.log("포인트 확인")
         // console.log(res)
-        alert(`${payload.point} 포인트를 얻었습니다!`)
+        if (payload.point<0){
+          alert(`${-1*payload.point} 포인트를 소모했습니다!`)
+        }else{
+          alert(`${payload.point} 포인트를 얻었습니다!`)
+        }
         context.commit('SAVE_USER',res.data)
       })
       .catch(err=>{

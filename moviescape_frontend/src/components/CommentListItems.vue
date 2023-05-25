@@ -49,6 +49,7 @@ export default {
   background-color: black;
   color: white;
   padding: 20px;
+
 }
 
 .comment-list {

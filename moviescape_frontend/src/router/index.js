@@ -34,6 +34,9 @@ import RandomProfileVue from '@/components/RandomProfile.vue';
 //###
 import TesT from '@/components/TesT.vue'
 
+//### NOT FOUND
+import NotFound from '@/components/404NotFound.vue'
+
 
 
 
@@ -150,6 +153,17 @@ const routes = [
     name: 'TesT',
     component: TesT
   },
+
+  // ### NOT FOUND
+  {
+    path: "/NotFound",
+    name: "NotFound",
+    component: NotFound
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: "/NotFound"
+  }
 
 ]
 

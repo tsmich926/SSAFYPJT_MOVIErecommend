@@ -14,6 +14,8 @@ from .serializers import (ActorSerializer,MovieSerializer,ReviewSerializer,Movie
                          DirectorDetailSerializer, DirectorSerializer, GenreSerializer,GenreDetailSerializer,
                          CommentSerializer,RatingSerializer )
 # Create your views here.
+import random
+from datetime import date
 
 
 # 영화 전체 리스트를 요청하는 것.
@@ -114,12 +116,13 @@ def genre_list(request):
     serializer=GenreSerializer(genres,many=True)
     return Response(serializer.data)
 
-# 장르 detail
+# 장르 detail, 좋아요
 @permission_classes([IsAuthenticated])
 @api_view(['GET','POST'])
 def genre_detail(request,genre_pk):
     genre=get_object_or_404(Genre,pk=genre_pk)
     if request.method=='POST':
+        print("에러 확인...")
         if genre.like_users.filter(pk=request.user.pk).exists():
             genre.like_users.remove(request.user)
         else:
@@ -132,6 +135,45 @@ def genre_detail(request,genre_pk):
         # movies=Movie.objects.all()[page*100:(page+1)*100]
         serializer=MovieSerializer(genre.movies.all()[page*100:(page+1)*100],many=True)
         return Response(serializer.data)
+
+# 추천 알고리즘
+@permission_classes([IsAuthenticated])
+@api_view(['GET'])
+def recommend(request,genre_pk):
+    genre=get_object_or_404(Genre,pk=genre_pk)
+    if request.method=='GET':
+        current_month = date.today().month
+        print(current_month)
+        movie=genre.movies.all().filter(release_date__month=current_month)
+        cnt=1
+        while not movie.exists():
+            if cnt>7:
+                break
+            calc_month=current_month+cnt
+            if calc_month>12:
+                calc_month-=12
+            print(calc_month)
+            movie=genre.movies.all().filter(release_date__month=calc_month)
+            if movie.exists():
+                break
+
+            calc_month=current_month-cnt
+            if calc_month<1:
+                calc_month+=12
+            print(calc_month)   
+            movie=genre.movies.all().filter(release_date__month=calc_month)
+            if movie.exists():
+                break
+            cnt+=1
+        if movie.exists():
+            recommend_movie = random.choice(movie)
+            serializer=MovieDetailSerializer(recommend_movie)
+            return Response(serializer.data)
+        else:
+            movie=get_list_or_404(Movie)
+            recommend_movie = random.choice(movie)
+            serializer=MovieDetailSerializer(recommend_movie)
+            return Response(serializer.data,status=status.HTTP_206_PARTIAL_CONTENT)
 
 # 전체 리뷰 조회
 @permission_classes([IsAuthenticated])

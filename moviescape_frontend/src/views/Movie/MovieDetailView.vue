@@ -1,15 +1,14 @@
 <template>
   <div class= "container justify-content-center align-items-center">
-    <h1>MovieDetailView</h1>
       <!-- {{movie}} -->
     <div class="custom-0">
+    <h1 style="padding-top:20px;">영화 상세 정보</h1>
       <header class="custom-4ekwdf">
         <div class="custom-19pxr9t">
           <section type = "portrait" class="custom-1b2a0k5">
             <div type = "portrait" class="custom-1fbu1vu" >
               <img style='width:100%; height:100%;' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="영화이미지" class="custom-uc27kv">
               <br>
-              <p>dfsf</p>
               <!-- <i class="fa-regular fa-heart" style="color: #ffffff;"></i><i class="fa-regular fa-heart" style="color: #ffffff;"></i>
               <font-awesome-icon :icon="['far','heart']" size="lg" :style="{ color: 'red' }" /> -->
             </div>

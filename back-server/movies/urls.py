@@ -22,8 +22,11 @@ urlpatterns = [
     
     # genre whole
     path('genres/',views.genre_list),
-    # genre detail
+    # genre detail, 좋아요
     path('genres/<int:genre_pk>/',views.genre_detail),
+
+    # 추천 알고리즘!!!!!!!!!!!!!!!!
+    path('recommend/<int:genre_pk>/',views.recommend),
 
     # review whole
     path('reviews/',views.review_list),
