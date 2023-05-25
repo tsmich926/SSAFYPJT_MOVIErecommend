@@ -94,7 +94,9 @@ MyDetailView
 
 # 전체 일정
 
--------------노션 사진 추가
+<img src="./schedulegant.PNG">
+
+
 
 
 (현재 2023.05.22기준)
