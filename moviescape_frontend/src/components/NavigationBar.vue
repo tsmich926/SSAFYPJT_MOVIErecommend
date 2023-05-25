@@ -3,17 +3,19 @@
      <nav class="navbar fixed-nav my_navBar"> <!--//여기에수정 -->
       <div class="scroll-wrapper">
         <router-link :to="{name:'HomeView'}">
-          <img src="@/assets/escape.webp" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-          Moviescape
+          <img src="@/assets/MainLogo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+          <p>
+          MOVIESCAPE
+          </p>
         </router-link>
         <!-- <a class="navbar-brand" href="/">
           
         </a> -->
         <router-link class="rout-bar" :to="{name:'MovieListView'}">영화</router-link>
         <!-- <router-link :to="{name:'GenreListView'}">GLV</router-link> -->
-        <router-link class="rout-bar" to="/RecommendView">Recommendation</router-link>
-        <router-link class="rout-bar" to="/ReviewListView">리뷰</router-link>
         <router-link class="rout-bar" to="/HumanListView">출연진</router-link>
+        <router-link class="rout-bar" to="/RecommendView">영화 추천받기</router-link>
+        <router-link class="rout-bar" to="/ReviewListView">리뷰</router-link>
         <router-link v-if="user" to="/MyDetailView">
           <img class="profile-image"  type="circle" :src="`${UserProfile}`" alt=""> &nbsp; {{user.username}}
         </router-link>

@@ -3,7 +3,10 @@
   <div v-if="Review" class="post-container" style="padding-left:100px; padding-right:100px;">
     <div style="width:100%">
       <div class="post">
-        <img :src="`https://image.tmdb.org/t/p/w500/${Review.movie.poster_path}`" style="margin-bottom:20px; width:100%;" alt="">
+        <img @click="gotoMovieDetail" :src="`https://image.tmdb.org/t/p/w500/${Review.movie.poster_path}`" style="margin-bottom:20px; width:100%;" alt=""> 
+        <h4 @click="gotoReviews" ref="authorDiv" style="margin-bottom:20px;" @mouseover="setCursor('pointer')" @mouseout="setCursor('auto')">
+          목록가기
+        </h4>
         <div class=" my-review-post">
           <h2 class="post-title">리뷰 : {{Review.title}}</h2>
           <div class="post-content">
@@ -52,6 +55,18 @@ export default {
     }
   },
   methods: {
+    gotoMovieDetail() {
+      const movieId = this.Review.movie.id; // 이동할 영화의 ID를 동적으로 설정할 수 있음
+      // console.log("MovieCard")
+      // console.log(movieId)
+      this.$router.push({ name: 'MovieDetailView', params: { id: movieId } });
+    },
+    setCursor(cursorType) {
+      this.$refs.authorDiv.style.cursor = cursorType;
+    },
+    gotoReviews(){
+      this.$router.push({name:'ReviewListView'})
+    },
     addComment() {
       const review_id=this.$route.params.id
       console.log("RRRRRRRRRR")
@@ -103,11 +118,6 @@ export default {
         console.log(err)
       })
     },
-    gotoComunityView() {
-      this.$router.push({
-        name: "ReviewListView",
-      });
-    }
   },
   created(){
     this.review_id = this.$route.params.id

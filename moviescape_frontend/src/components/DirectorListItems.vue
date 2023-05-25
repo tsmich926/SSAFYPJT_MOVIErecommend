@@ -2,7 +2,7 @@
   <div class="container justify-content-center">
     <div class="row">
       <!-- <h1>HumanListItems</h1> -->
-        <div class="col" v-for="director in ITEMdirectors" :key="director.name" >
+        <div class="col d-flex justify-content-center" v-for="director in ITEMdirectors" :key="director.name" >
           <DirectorCard :CARDhuman="director"/>
         </div> 
     </div>

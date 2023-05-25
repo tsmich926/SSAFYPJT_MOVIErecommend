@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <div>
+  <div class="container justify-content-center align-items-center my_MovieListView_BGC">
+    <div class="my-center-content">
       <h1>랜덤 profile뽑기입니다~</h1>
-    </div>
-    <input v-model="term" type="text" @keyup.enter="getRandomProfile">
-    <div>
-      <img :src="MyProfile" alt="">
+      <input style="margin-bottom:10px;" v-model="term" type="text" @keyup.enter="getRandomProfile">
+      <button @click="getRandomProfile" class="btn" style="background-color: #008080;">
+        뽑기
+      </button>
+      <div class="my-profile-back row justify-content-center">
+        <img class="col" :src="MyProfile" alt="">
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 import { mapState } from 'vuex';
 import axios from 'axios'
@@ -81,6 +83,53 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.my_MovieListView_BGC {
+  background-color: #1C1918;
+  border-radius: 5px;
+  width: 1000px;
+  height: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding-top: */
+}
 
+.my-center-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.my-profile-back {
+  width: 900px;
+  height: 900px;
+  border: white 1px solid;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-margin-bottom {
+  margin-bottom: 20px;
+}
+
+/* 드롭다운 스타일링 */
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  width: 50%;
+  border-radius: 5px;
+  background-color: #2C2B2A;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+option {
+  background-color: #2C2B2A;
+  color: #FFFFFF;
+  text-align: center;
+}
 </style>

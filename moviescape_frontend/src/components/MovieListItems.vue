@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="container text-center">
+    <div class="container justify-content-center text-center">
       <div class="row">
-        <div class="col" v-for="movie in ITEMmovies" :key="movie.pk" >
+        <div class="col d-flex justify-content-center" v-for="movie in ITEMmovies" :key="movie.id">
           <MovieCard :CARDmovie="movie"/>
         </div>
       </div>

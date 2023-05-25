@@ -1,40 +1,39 @@
 <template>
-  <div class= "container">
-    <h1>DirectorDetailView</h1>
-      <!-- {{movie}} -->
-    <div class="row my-no-wrap ">
-      <div type="circle" class="col my-container-width my-director">
-        <img class="" width="400" height="500" :src="`https://image.tmdb.org/t/p/w500/${Director.profile_path}`" alt="...">
+  <div class="container my-back-ground">
+    <h1 class="my-director-name">{{ Director.name }}</h1>
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="my-director custom-1dm77tq">
+          <img width="400" height="500" :src="`https://image.tmdb.org/t/p/w500/${Director.profile_path}`" alt="...">
+        </div>
       </div>
     </div>
     <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
       {{ IsLiked ? '❤' : '🤍'}}
     </button>
-    <div class="row my-no-wrap">
-      <div class="col">
-        <h2 class="my-no-wrap">감독 이름 : {{Director.name}}</h2>
-      </div>
+    <div>
+      <h2 v-if="Director.like_users">
+        {{Director.name}}를 좋아하는 사람들 : {{Director.like_users.length}}
+      </h2>
     </div>
     <div class="row my-no-wrap">
       <div class="col">
         <div class="my-wrap"></div>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center list">
       <h1>영화 목록</h1>
-      <MovieListItemsVue :ITEMmovies="Director.movies"/>
+      <div>
+        <MovieListItemsVue :ITEMmovies="Director.movies"/>
+      </div>
     </div>
-    <div class="row justify-content-center">
-      <h1>출연 배우</h1>
-    </div>
+    <div class="row justify-content-center"></div>
     <div class="row">
       <h2></h2>
     </div>
     <div class="row">
       <h2></h2>
     </div>
-
-
   </div>
 </template>
 
@@ -78,7 +77,7 @@ export default {
         // console.log(res)
         // console.log(res.data)
         this.director=res.data
-        this.like_cnt=res.data.like_users.length
+        // this.like_cnt=res.data.like_users.length
         this.$store.dispatch('SaveUser')
       })
       .catch(err=>{
@@ -112,25 +111,48 @@ export default {
 </script>
 
 <style scoped>
-.my-director{
-  display: flex;
-
-}
-.my-no-wrap{
+.my-no-wrap {
   display: flex;
   flex-wrap: nowrap;
 }
-.my-container-pr{
+
+.my-director {
+  display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  margin: 0 auto 30px;
+  overflow: hidden;
+  position: relative;
 }
-.my-container-width{
-  width:600px;
+
+.my-director img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
-/* .no-wrap{
-  white-space: nowrap;  
-} */
-.my-wrap {
-  white-space: normal;
+.my-back-ground{
+  padding-top: 10px;
+  background-color: black;
+  border-radius: 10px;
+}
+.my-director-name {
+  margin-top:1px;
+  /* position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%); */
+  background-color: rgba(252, 252, 252, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  font-size: 30px;
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Nanum Gothic", "Malgun Gothic", sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  margin-top: 150px;
 }
 </style>

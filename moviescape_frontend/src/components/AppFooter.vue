@@ -2,7 +2,7 @@
   <div>
     <footer class="black-footer">
       <div class="footer-content">
-        Footer 내용을 추가하세요
+        상호 : MOVIESCAPE ㅣ 공동 대표 : 손임현, 황수아 ㅣ 사업자번호 : 123-45-678910
       </div>
     </footer>
   </div>

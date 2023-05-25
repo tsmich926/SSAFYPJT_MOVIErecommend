@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="board-detail">
     <h2>새로운 글 등록</h2>
-    <div class="board-detail">
+    <div>
       <form action="">
         <div class="board-contents">
           <div class="search-wrapper">
@@ -156,6 +156,12 @@ export default {
 </script>
 
 <style>
+.board-detail{
+  border-radius: 10px;
+  padding:20px;
+  width:700px;
+  background-color: black;
+}
 .btn {
   padding: 8px 16px;
   border: none;

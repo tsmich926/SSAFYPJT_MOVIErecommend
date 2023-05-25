@@ -3,10 +3,6 @@
     <hr>
     <div class="row"> 
       <p>게시글</p>
-      <!-- <input type="button" value="게시글 작성" @click="gotoCreateArticle"> -->
-      <div class="d-flex">
-        <button class="btn btn-outline-light" type="button" @click="gotoCreateArticle">글쓰기</button>
-      </div>
       <ReviewItems :ITEMreviews="review_list"/>
     </div>
   </div>
@@ -63,6 +59,9 @@ export default {
 
 
 <style scoped>
+.reviewlist{
+  background-color: black;
+}
 .btn-save,
 .btn-list {
   width: 200px; /* 원하는 너비 값으로 수정 */

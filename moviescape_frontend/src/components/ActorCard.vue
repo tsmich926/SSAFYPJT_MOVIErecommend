@@ -1,25 +1,29 @@
 <template>
   <div>
-      <ul type="listItem" class="custom-i8o1y5">
-      <li class="custom-11zhy3w">
-        <a title="조 라이트" class="custom-kbqkpi">
-        <div class="custom-kzzlk2">
-          <div class="custom-1w7o208">
-            <div height="62" type="circle" width="62" class="custom-1dm77tq">
-              <img  @click="gotoDetail" alt="배우 이미지" :src="ImgURL" class="custom-1mxmenj" >
+    <ul type="listItem" class="container justify-content-center custom-i8o1y5" style="text-align:center;">
+      <li class="row" style="width:140px;">
+        <div class="col custom-1dm77tq">
+          <div class="custom-image-wrapper" @click="gotoDetail">
+            <div class="custom-image-circle">
+              <img alt="배우 이미지" :src="ImgURL" class="custom-1mxmenj">
             </div>
-          <div class="custom-11zhy3w">
-            <div class="custom-15vtjyx">{{CARDhuman.name}}</div>
-            <div class="custom-hbs6kl-AccessoryModule">배우</div>
-                      <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
-            {{ IsLiked ? '❤' : '🤍'}}
-          </button>
-          </div>
           </div>
         </div>
-        </a>
+        <div class="col custom-11zhy3w">
+          <div class="custom-info-wrapper">
+            <div class="custom-center-wrapper">
+              <div class="custom-15vtjyx">{{CARDhuman.name}}</div>
+              <div class="custom-heart-wrapper">
+                <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
+                  {{ IsLiked ? '❤' : '🤍'}}
+                </button>
+              </div>
+            </div>
+            <div class="custom-hbs6kl-AccessoryModule">배우</div>
+          </div>
+        </div>
       </li>
-      </ul>
+    </ul>
   </div>
 </template>
 
@@ -110,151 +114,63 @@ export default {
 
 
 <style scoped>
-/* .my-card-margin{
-  margin-bottom: 10px;
-}
-.row {
-display: flex;
-flex-wrap: wrap;
-margin: -15px;
-}
 
-.col-md-3 {
-width: 25%;
-padding: 15px;
-box-sizing: border-box;
-}
- */
-
-
-
-.custom-1os014q {
-    margin: 0px 0px 32px;
-    background-color: black;
+.custom-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 62px;
+  overflow: hidden;
 }
 
-
-.custom-efczeh {
-    display: flex;
-    position: relative;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    align-items: flex-end;
-    font-size: initial;
-    margin-bottom: 5px;
-}
-
-.custom-1lhv0ae {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    min-width: 0px;
-}
-
-.custom-55smc4 {
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 0px;
-    line-height: 26px;
-}
-
-.custom-1ynili3 {
-    display: inline-block;
-    vertical-align: top;
-    margin: 3px 0px 0px 8px;
-}
-
-.custom-1fbr3zd-ShowMoreButton {
-    flex-shrink: 0;
-    padding-bottom: 3px;
-    margin-left: 6px;
-}
-
-.custom-ss4kux {
-    color: rgb(132, 134, 141);
-    font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 0px;
-    line-height: 20px;
-}
-
-.custom-i8o1y5 {
-    /* display: grid; */
-    column-gap: 20px;
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.custom-11zhy3w {
-    overflow: hidden;
-    text-decoration: none;
-}
-
-.custom-kbqkpi {
-    display: block;
-    text-decoration: none;
-}
-
-.custom-1w7o208 {
-    display: grid;
-    position: relative;
-    flex: 1 1 0%;
-    -webkit-box-align: center;
-    /* align-items: center;
-    justify-content: center; */
-    overflow: hidden;
-
-}
-
-.custom-1dm77tq {
-    display: flex;
-    position: relative;
-    flex-shrink: 0;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    margin-right: 14px;
-    overflow: hidden;
+.custom-image-circle {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background-color: #f5f5f51c; /* 원의 배경 색상 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .custom-1mxmenj {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  border-radius: 50%; /* 이미지에 원형 테두리를 추가하여 원형으로 보이도록 설정 */
+}
+
+.custom-11zhy3w {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.custom-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  color: white;
+}
+
+.custom-center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .custom-15vtjyx {
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 0px;
-    line-height: 22px;
-    white-space: nowrap;
-    /* overflow: hidden; */
-    text-overflow: ellipsis;
-    text-decoration: none;
-    overflow: hidden;
+  white-space: nowrap; /* 글자가 넘칠 경우 줄바꿈하지 않고 한 줄에 표시되도록 설정 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 글자가 넘칠 경우 생략 부호 (...) 표시 */
 }
 
-
-.custom-hbs6kl-AccessoryModule {
-    color: rgb(132, 134, 141);
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0px;
-    line-height: 18px;
-    white-space: nowrap;
-    margin-top: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.custom-heart-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
-
-
 </style>

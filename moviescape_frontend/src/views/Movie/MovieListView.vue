@@ -1,6 +1,7 @@
 <template>
   <div class= "my_MovieListView_BGC">
-    <h1 style="margin-bottom:50px; padding-top:30px;">영화 목록</h1>
+    <!-- <h1 style="margin-bottom:50px; padding-top:30px;">영화 목록</h1> -->
+    <h1>영화 목록</h1>
     <div>
       <div class="my-margin-bottom">
         <select v-model="selectedItem" @change="selectItem">
@@ -67,9 +68,9 @@ export default {
     },
     getWholeMovies($state) {
       if (window.innerHeight + window.pageYOffset < document.body.offsetHeight - 300) {
-        return
+        return;
       }
-      if (!this.is_completed){
+      if (!this.is_completed) {
         if (this.selectedItem == '1') {
           axios({
             method: 'get',
@@ -81,21 +82,22 @@ export default {
               Authorization: `Token ${this.$store.state.token}`
             }
           })
-            .then((res) => {
-              if (res.data.length) {
-                this.page += 1
-                this.movies.push(...res.data)
-                $state.loaded();
-              } else {
-                this.is_completed=true
-                // $state.complete()
+          .then((res) => {
+            if (res.data.length) {
+              this.page += 1;
+              this.movies.push(...res.data);
+              if ($state) {
+                $state.loaded(); // 데이터 로드 완료를 알림
               }
-            })
-            .catch(err => {
-              console.log(err)
-            })
+            } else {
+              this.is_completed = true;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
         } else {
-          const genre_id = this.selectedItem
+          const genre_id = this.selectedItem;
           axios({
             method: 'get',
             url: `http://127.0.0.1:8000/api/v1/genres/${genre_id}/`,
@@ -106,22 +108,24 @@ export default {
               Authorization: `Token ${this.$store.state.token}`
             }
           })
-            .then((res) => {
-              if (res.data.length) {
-                this.page += 1
-                this.movies.push(...res.data)
-                $state.loaded();
-              } else {
-                this.is_completed=true
-                // $state.complete()
+          .then((res) => {
+            if (res.data.length) {
+              this.page += 1;
+              this.movies.push(...res.data);
+              if ($state) {
+                $state.loaded(); // 데이터 로드 완료를 알림
               }
-            })
-            .catch(err => {
-              console.log(err)
-            })
+            } else {
+              this.is_completed = true;
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
         }
       }
     }
+
   },
 }
 </script>

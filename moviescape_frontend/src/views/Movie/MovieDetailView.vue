@@ -39,16 +39,20 @@
                   </div>
                 </div>
               <!-- </p> -->
-              <p class="custom-1cfj8mp">
-                {{movie.overview}}
+               <p class="custom-1cfj8mp" :class="{'my-line-9': HideOver2, 'none': !HideOver2}">
+                {{ movie.overview }}
               </p>
+              <button @click="toggleLineClamp" class="btn" style="background-color: #008080;">
+                <span v-if="HideOver2">더보기</span>
+                <span v-else>숨기기</span>
+              </button>
             </div>
           </section>
           <div class="custom-10tp89e">
             <section class="custom-1mscwm6">
               <div class="custom-sa68ux">
-                <a class="custom-1updnc7">
-                  보러가기
+                <a class="custom-1updnc7" @click="gotoCreateReview">
+                  리뷰쓰러가기
                 </a>
               </div>
               <div class="custom-sa68ux" >
@@ -80,17 +84,12 @@
             </div>
             <ul class="custom-nhnj2n">
               <li>
-                <iframe id="player" type="text/html" width="600" height="500"
-          :src="`https://www.youtube.com/embed/${youtube_key}`"
-          frameborder="0"></iframe>
-                  <div class="custom-1ngnn9r">
-                    <div class="custom-c9eeru">
-                      <div aria-hidden="true" class="custom-7v1m1m">
-                        <p class="custom-1ponucs">숨긴 영화 설명 ... . ..</p>
-
-                      </div>
-                    </div>
-                  </div>
+                <iframe v-if="this.y_key" id="player" type="text/html" width="600" height="500"
+                  :src="`https://www.youtube.com/embed/${youtube_key}`"
+                  frameborder="0"></iframe>
+                <iframe v-if="this.randomMovieYoutubeURL!=null" id="ytplayer" type="text/html" width="600" height="500"
+                  :src="`https://www.youtube.com/embed/${this.randomMovieYoutubeURL}`"
+                  frameborder="0"></iframe>               
               </li>
             </ul>
           </section>
@@ -105,12 +104,15 @@
                   </h1>
                     <div class="custom-1ynili3"></div>
                       <DirectorListItems :ITEMdirectors="movie.directors"/>
-                      <ActorListItems :ITEMactors="movie.actors"/>
+                      <ActorListItems :ITEMactors="Hideactors"/>
               </div>
           </div>
       </div>
-          <div class="custom-1fbr3zd-ShowMoreButton">
-            <a role="button" class="custom-ss4kux" href="/contents/mOk6ZMW/credits">더보기</a>
+          <div class="custom-1fbr3zd-ShowMoreButton" style="text-align:center;">
+            <a @click="ActorHide" role="button" class="custom-ss4kux" style="background-color:#008080; width:80%;">
+              <span v-if="IsHide">더보기</span>
+              <span v-else>숨기기</span>
+            </a>
           </div>
   </section>                         
       <section class="custom-hgckol">
@@ -118,40 +120,25 @@
           <div class="custom-1lhv0ae">
             <div>
               <h1 class="custom-55smc4">
-                MOVIESCAPE 사용자 평
+                &nbsp;&nbsp;&nbsp;&nbsp; MOVIESCAPE 리뷰
               </h1>
             </div>
           </div>
         </div>
         <ul class="custom-syergp">
-          <li>
             <article class="custom-13frh63"> 
-              <div class="custom-6fc8lh">
-                <a href="#">
-                  <img src="@/assets/logo.png" alt="user프로필" class="custom-nhnvgi">
-                </a>
-              </div>
               <div class="custom-yp9swi">
                 <div class="custom-1sg2lsz">
-                  <div class="custom-ex2l60" v-for="review in movie.reviews" :key="review.id">
-                    <a href="#">{{review.user.username}}</a>
-                  </div>
-                  <div class="custom-lz79eo" v-for="review in movie.reviews" :key="review.id">
-                    <p class="LinesEllipsis ">
-                      {{review.title}}
-                      <wbr>
-                    </p>
+                  <div v-for="review in this.movie.reviews" :key="review.id">
+
+                    <MovieDetailReview :review="review"/>
                   </div>
                 </div>
               </div>
             </article>
-          </li>
         </ul>
       </section>
     </div>
-    <ActorListItems/>
-    <DirectorListItems/>
-    <MovieDetailReview :review="this.movie.reviews"/>
   </div>
 </template>
 
@@ -182,6 +169,11 @@ export default {
       rating_average:0,
       is_rated:false,
       rating_cnt:0,
+      is_hide:true,
+      HideOver:true,
+      // movie_title:null,
+      Y_url:null,
+      // randomMovieYoutubeURL:null
     }
   },
   beforeRouteUpdate(to,from,next){
@@ -190,6 +182,24 @@ export default {
     next()
   },
   computed:{
+    randomMovieYoutubeURL(){
+      console.log("영화 왜 안보여 ㅠㅠ")
+      console.log(this.Y_url)
+      return this.Y_url
+    },
+    Hideactors(){
+      if(this.movie.actors && this.IsHide){
+        return this.movie.actors.slice(0, 10);
+      }else{
+        return this.movie.actors
+      }
+    },
+    HideOver2(){
+      return this.HideOver
+    },
+    IsHide(){
+      return this.is_hide
+    },
     ...mapState(['user']),
     youtube_key(){
       return this.y_key
@@ -210,6 +220,43 @@ export default {
     }
   },
   methods:{
+
+    getYoutube(){
+      const API_KEY="AIzaSyC1Iaqm0L7oQ3L9sNTmya4FaBTyBg1S_Fg"
+      const API_URL="https://www.googleapis.com/youtube/v3/search"
+      console.log("영화화화")
+      console.log(this.movie.title)
+      const keyword=this.movie.title
+      axios({
+        method:'get',
+        url:API_URL,
+        params:{
+          part:'snippet',
+          key:API_KEY,
+          order:'viewCount',
+          q:`${keyword} 예고편`,
+          maxResults:1
+        }
+      })
+      .then((response)=>{
+        console.log(response)
+        this.Y_url=response.data.items[0].id.videoId
+        // console.log(this.Y_url=response.data.items)
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
+    },
+
+    toggleLineClamp() {
+      this.HideOver = !this.HideOver;
+    },
+    gotoCreateReview(){
+      this.$router.push({name:'CreateReviewView'})
+    },
+    ActorHide(){
+      this.is_hide=!this.is_hide
+      },
     getRating(){
       axios({
           method:'get',
@@ -297,6 +344,8 @@ export default {
         // console.log("movieDetail")
         console.log(res)
         this.movie=res.data
+        // this.movie_title=this.movie.title
+        this.getYoutube()
         // console.log("like_users")
         // console.log(this.movie.like_users)
         this.like_cnt=this.movie.like_users.length
@@ -304,8 +353,6 @@ export default {
         if (res.data.ratings){
           let ratings_sum=0
           res.data.ratings.forEach((rating) => {
-            console.log("확인용")
-            console.log(rating)
             ratings_sum+=rating.score
           })
           this.rating_average=ratings_sum/this.rating_cnt
@@ -348,6 +395,7 @@ export default {
     this.getDetailMovies(this.movie_id)
     // console.log("getrating 실행중?")
     this.getRating()
+    
   },
   mounted(){
     // this.getDetailMovies(this.movie_id)
@@ -356,7 +404,9 @@ export default {
 </script>
 
 <style scoped>
-
+.my-line-9{
+  -webkit-line-clamp:9;
+}
 .my-container-bottom{
   margin-bottom:40px;
 }
@@ -517,7 +567,6 @@ img {
 .custom-1cfj8mp {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 9;
     color: rgb(186, 186, 193);
     font-size: 25px;
     font-weight: 400;
@@ -763,7 +812,9 @@ header {
 .custom-1fbr3zd-ShowMoreButton {
     flex-shrink: 0;
     padding-bottom: 3px;
-    margin-left: 6px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
 
 .custom-ss4kux {

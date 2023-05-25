@@ -2,7 +2,7 @@
   <tr class="cardtext">
     <td>{{ CARDreview.id }}</td>
     <td
-      style="color: black;"
+      style="color: white;"
       @click="gotoReviewDetail"
       ref="authorTd"
       @mouseover="setCursor('pointer')"

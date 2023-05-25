@@ -2,6 +2,7 @@
   <div v-if="DetailUser" class="profile-page">
     <div class="user-info">
       <!-- <img class="profile-image" :src="user.profile_path" alt="Profile Image" /> -->
+      <img class="profile-image"  type="circle" :src="`${UserProfile}`" alt="">
       <h2 class="username">{{ DetailUser.username }} 님</h2>
       <p class="point">💰: {{ DetailUser.point }} point</p>
       <p class="follower-count">팔로워: {{ DetailUser.followers.length }}명</p>
@@ -14,12 +15,13 @@
     <div class="liked-movies">
       <h3>좋아요한 영화 </h3>
       <ul class="row">
-        <li class="col" v-for="movie in DetailUser.movies" :key="movie.id">
+        <li class="col" style="color:white;" v-for="movie in DetailUser.movies" :key="movie.id">
           <p class="movie-title">{{movie.title}}</p>
           <img
           :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`"
           class="card-img-top my-card-img" alt="..."
           style="width:120px; height:150px"
+          @click="gotoDetail(movie)"
           >
         </li>
       </ul>
@@ -91,6 +93,13 @@ export default {
     DetailUser(){
       return this.detailuser
     },
+    UserProfile(){
+      if (this.DetailUser.profile_path=='default'){
+        return 'http://localhost:8080/user/default.png'
+      }else{
+        return this.Detailuser.profile_path
+      }
+    },
     genres(){
       return this.DetailUser.genres
     },
@@ -159,6 +168,13 @@ export default {
     }
   },
   methods:{
+    gotoDetail(movie){
+      // this.$store.commit('SAVE_MOVIE_ID', movie.id)
+      const movieId = movie.id; // 이동할 영화의 ID를 동적으로 설정할 수 있음
+      // console.log("MovieCard")
+      // console.log(movieId)
+      this.$router.push({ name: 'MovieDetailView', params: { id: movieId } });
+    },
     follow(){
       console.log(this.DetailUser.id)
       axios({
@@ -223,11 +239,11 @@ export default {
 }
 
 .profile-image {
-  width: 200px;
-  height: 200px;
+  height: 40px;
+  width: 40px;
   object-fit: cover;
   border-radius: 50%;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin-right: 5px;
 }
 
 .username {
