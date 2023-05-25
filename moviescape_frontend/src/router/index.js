@@ -10,8 +10,7 @@ import MovieListView from '@/views/Movie/MovieListView.vue'
 import GenreListView from '@/views/Movie/GenreListView.vue'
 
 // Human
-import ActorListView from '@/views/Human/ActorListView.vue'
-import DirectorListView from '@/views/Human/DirectorListView.vue'
+import HumanListView from '@/views/Human/HumanListView.vue'
 import ActorDetailView from '@/views/Human/ActorDetailView.vue'
 import DirectorDetailView from '@/views/Human/DirectorDetailView.vue'
 
@@ -69,14 +68,9 @@ const routes = [
 
   // Human
   {
-    path: '/ActorListView',
-    name: 'ActorListView',
-    component: ActorListView
-  },
-  {
-    path: '/DirectorListView',
-    name: 'DirectorListView',
-    component: DirectorListView
+    path: '/HumanListView',
+    name: 'HumanListView',
+    component: HumanListView
   },
   {
     path: '/ActorDetailView',

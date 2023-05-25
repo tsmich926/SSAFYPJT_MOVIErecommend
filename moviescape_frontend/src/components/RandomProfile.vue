@@ -45,11 +45,14 @@ export default {
     })
     .then(response => {
       // 응답 처리
-      console.log("아오")
       console.log(response)
-      const images = response.data.results[0].urls.regular; // 이미지 URL 목록 가져오기
-      this.userimg=images
-      console.log('Image URLs:', images);
+      if (response.data.results[0]){
+        const images = response.data.results[0].urls.regular; // 이미지 URL 목록 가져오기
+        this.userimg=images
+        console.log('Image URLs:', images);
+      }else{
+        alert("꽝!")
+      }
     })
     .catch(error => {
       // 오류 처리

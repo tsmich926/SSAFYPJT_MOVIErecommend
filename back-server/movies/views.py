@@ -124,8 +124,14 @@ def genre_detail(request,genre_pk):
             genre.like_users.remove(request.user)
         else:
             genre.like_users.add(request.user)
-    serializer=GenreDetailSerializer(genre)
-    return Response(serializer.data)
+        serializer=GenreDetailSerializer(genre)
+        return Response(serializer.data)
+    if request.method=='GET':
+        page=int(request.GET.get('page'))
+        print(page)
+        # movies=Movie.objects.all()[page*100:(page+1)*100]
+        serializer=MovieSerializer(genre.movies.all()[page*100:(page+1)*100],many=True)
+        return Response(serializer.data)
 
 # 전체 리뷰 조회
 @permission_classes([IsAuthenticated])

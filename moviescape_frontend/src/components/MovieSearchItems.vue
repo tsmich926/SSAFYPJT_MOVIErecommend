@@ -8,7 +8,7 @@
           v-model.trim="SearchTitle"
           class="search-input"
           placeholder="영화를 검색하세요"
-          style="width:100%;"
+          style="min-width:400px;"
         />
         <input
           type="button"

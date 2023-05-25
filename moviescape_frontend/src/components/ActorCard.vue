@@ -1,36 +1,25 @@
 <template>
-  <!-- <div class="">
-    <div class="d-flex justify-content-center align-items-center">
-      <div class="card my-card-margin" style="width: 18rem;" @mouseenter="zoomInCard" @mouseleave="zoomOutCard">
-        <img @click="gotoDetail" :src="ImgURL" class="card-img-top" alt="Actor Image" style="height: 27rem;">
-        <div class="card-body text-center">
-          <h5 class="card-name">{{CARDhuman.name}}</h5>
-          <h5>좋아하는 사람 수: {{LikeCnt}}</h5>
-          <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
+  <div>
+      <ul type="listItem" class="custom-i8o1y5">
+      <li class="custom-11zhy3w">
+        <a title="조 라이트" class="custom-kbqkpi">
+        <div class="custom-kzzlk2">
+          <div class="custom-1w7o208">
+            <div height="62" type="circle" width="62" class="custom-1dm77tq">
+              <img  @click="gotoDetail" alt="배우 이미지" :src="ImgURL" class="custom-1mxmenj" >
+            </div>
+          <div class="custom-11zhy3w">
+            <div class="custom-15vtjyx">{{CARDhuman.name}}</div>
+            <div class="custom-hbs6kl-AccessoryModule">배우</div>
+                      <button type="button" @click="likeHuman()" class="btn btn-outline-primary">
             {{ IsLiked ? '❤' : '🤍'}}
           </button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <div>
-        <!-- <ul type="listItem" class="custom-i8o1y5">
-        <li class="custom-11zhy3w">
-          <a title="조 라이트" class="custom-kbqkpi" href="/people/rQ7XLbbb7A">
-          <div class="custom-kzzlk2">
-            <div class="custom-1w7o208">
-              <div height="62" type="circle" width="62" class="custom-1dm77tq">
-                <img alt="감독 이미지" src="https://an2-img.amz.wtchn.net/image/v2/CeIRDTazPLOwvlTc7JG1eA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qUXdlREkwTUNKZExDSndJam9pTDNZeEwzQmxiM0JzWlM5bE9UTmhOemhtWVRreFpUQmxZV1F4WVRBMk9TNXFjR2NpZlEuOEJyR2l2UkFqUGhyV1dFQUVGZWN3UkdpR0MyS2ZjbVdmU0JoSGdHNGNQMA" class="custom-1mxmenj">
-              </div>
-            <div class="custom-11zhy3w">
-              <div class="custom-15vtjyx">조 라이트</div>
-              <div class="custom-hbs6kl-AccessoryModule">감독</div>
-            </div>
-            </div>
           </div>
-          </a>
-        </li>
-        </ul> -->
+          </div>
+        </div>
+        </a>
+      </li>
+      </ul>
   </div>
 </template>
 
@@ -121,7 +110,7 @@ export default {
 
 
 <style scoped>
-.my-card-margin{
+/* .my-card-margin{
   margin-bottom: 10px;
 }
 .row {
@@ -135,4 +124,137 @@ width: 25%;
 padding: 15px;
 box-sizing: border-box;
 }
+ */
+
+
+
+.custom-1os014q {
+    margin: 0px 0px 32px;
+    background-color: black;
+}
+
+
+.custom-efczeh {
+    display: flex;
+    position: relative;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: initial;
+    margin-bottom: 5px;
+}
+
+.custom-1lhv0ae {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    min-width: 0px;
+}
+
+.custom-55smc4 {
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    line-height: 26px;
+}
+
+.custom-1ynili3 {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 0px 0px 8px;
+}
+
+.custom-1fbr3zd-ShowMoreButton {
+    flex-shrink: 0;
+    padding-bottom: 3px;
+    margin-left: 6px;
+}
+
+.custom-ss4kux {
+    color: rgb(132, 134, 141);
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 20px;
+}
+
+.custom-i8o1y5 {
+    /* display: grid; */
+    column-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.custom-11zhy3w {
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.custom-kbqkpi {
+    display: block;
+    text-decoration: none;
+}
+
+.custom-1w7o208 {
+    display: grid;
+    position: relative;
+    flex: 1 1 0%;
+    -webkit-box-align: center;
+    /* align-items: center;
+    justify-content: center; */
+    overflow: hidden;
+
+}
+
+.custom-1dm77tq {
+    display: flex;
+    position: relative;
+    flex-shrink: 0;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    margin-right: 14px;
+    overflow: hidden;
+}
+
+.custom-1mxmenj {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.custom-15vtjyx {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 22px;
+    white-space: nowrap;
+    /* overflow: hidden; */
+    text-overflow: ellipsis;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+
+.custom-hbs6kl-AccessoryModule {
+    color: rgb(132, 134, 141);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0px;
+    line-height: 18px;
+    white-space: nowrap;
+    margin-top: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
 </style>

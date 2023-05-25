@@ -20,6 +20,7 @@ export default new Vuex.Store({
     director_id:null,
     user_id:null,
     user:null,
+    theme:null,
   },
 
   getters: {

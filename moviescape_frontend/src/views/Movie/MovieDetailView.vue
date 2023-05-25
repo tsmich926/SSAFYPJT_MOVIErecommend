@@ -8,12 +8,16 @@
           <section type = "portrait" class="custom-1b2a0k5">
             <div type = "portrait" class="custom-1fbu1vu" >
               <img style='width:100%; height:100%;' :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`" alt="영화이미지" class="custom-uc27kv">
+              <br>
+              <p>dfsf</p>
+              <!-- <i class="fa-regular fa-heart" style="color: #ffffff;"></i><i class="fa-regular fa-heart" style="color: #ffffff;"></i>
+              <font-awesome-icon :icon="['far','heart']" size="lg" :style="{ color: 'red' }" /> -->
             </div>
             <div class= "custom-1qxls6i">
               <h1 class="custom-1rhk36" >{{movie.title}}</h1>
               <p class="custom-1hb39aj">
                 <span class="custom-0">
-                  <a v-for='genre in movie.genres' :key="genre.id" class="custom-1ev3txx">{{genre.name}} &nbsp;</a>
+                  <a v-for='genre in movie.genres' :key="genre.id" class="custom-1ev3txx  custom-1u6ofa6">{{genre.name}} &nbsp;</a>
                   · 
                   <span class="custom-16k1fda">유저 평균 평점:{{RatingAverage}}</span>
                 </span > 
@@ -49,7 +53,11 @@
                 </a>
               </div>
               <div class="custom-sa68ux" >
-                <button  class="wished custom-okxqa8" type="button"> 좋아요 </button>
+                <!-- <button @click="likeMovie" class="wished custom-okxqa8" type="button"> 좋아요 💖 </button> -->
+                <button @click="likeMovie" class=" custom-okxqa8" type="button">
+                  <span v-if="IsLiked">❤️</span>
+                  <span v-else>🖤</span>
+                </button>
                 <p>좋아하는 유저수</p>
                 <hr>
                 <p>{{ LikeCnt }}</p>
@@ -95,48 +103,16 @@
               <div>
                   <h1 class="custom-55smc4">
                     감독/출연
-                    <div class="custom-1ynili3"></div>
-                      <DirectorListItems :ITEMdirctors="movie.directors"/>
-                      <ActorListItems :ITEMactors="movie.actors"/>
                   </h1>
+                    <div class="custom-1ynili3"></div>
+                      <DirectorListItems :ITEMdirectors="movie.directors"/>
+                      <ActorListItems :ITEMactors="movie.actors"/>
               </div>
           </div>
       </div>
           <div class="custom-1fbr3zd-ShowMoreButton">
             <a role="button" class="custom-ss4kux" href="/contents/mOk6ZMW/credits">더보기</a>
           </div>
-      <!-- <ul type="listItem" class="custom-i8o1y5">
-        <li class="custom-11zhy3w">
-          <a title="조 라이트" class="custom-kbqkpi" href="/people/rQ7XLbbb7A">
-          <div class="custom-kzzlk2">
-            <div class="custom-1w7o208">
-              <div height="62" type="circle" width="62" class="custom-1dm77tq">
-                <img alt="조 라이트의 이미지" src="https://an2-img.amz.wtchn.net/image/v2/CeIRDTazPLOwvlTc7JG1eA.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qUXdlREkwTUNKZExDSndJam9pTDNZeEwzQmxiM0JzWlM5bE9UTmhOemhtWVRreFpUQmxZV1F4WVRBMk9TNXFjR2NpZlEuOEJyR2l2UkFqUGhyV1dFQUVGZWN3UkdpR0MyS2ZjbVdmU0JoSGdHNGNQMA" class="custom-1mxmenj">
-              </div>
-            <div class="custom-11zhy3w">
-              <div class="custom-15vtjyx">조 라이트</div>
-              <div class="custom-hbs6kl-AccessoryModule">감독</div>
-            </div>
-            </div>
-          </div>
-          </a>
-        </li>
-      <li class="custom-11zhy3w">
-        <a title="브렌다 블레신" class="custom-kbqkpi" href="/people/j04dqLrZGp">
-          <div class="custom-kzzlk2">
-            <div class="custom-1w7o208">
-                <div height="62" type="circle" width="62" class="custom-1dm77tq">
-                  <img alt="브렌다 블레신의 이미지" src="https://an2-img.amz.wtchn.net/image/v2/wms-8tWaVXWeLOMNvWB-eQ.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKdmNIUnpJanBiSW1SZk1qUXdlREkwTUNKZExDSndJam9pTDNZeEwzQmxiM0JzWlM5aFltSmxNMlU0TjJFMk9UazNNamd6TVdKallpNXFjR2NpZlEuQnZpVkltWDdVTFlIUGhjUndwWWVVTXY0N25peGRyZkpHMzhpMFQ1T1UzOA" class="custom-1mxmenj">
-                </div>
-                  <div class="custom-11zhy3w">
-                    <div class="custom-15vtjyx">브렌다 블레신</div>
-                    <div class="custom-hbs6kl-AccessoryModule">조연 · Mrs. 베넷</div>
-                  </div>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul> -->
   </section>                         
       <section class="custom-hgckol">
         <div class="custom-efczeh">
@@ -176,12 +152,13 @@
     </div>
     <ActorListItems/>
     <DirectorListItems/>
-    <TestReview />
+    <MovieDetailReview :review="this.movie.reviews"/>
   </div>
 </template>
 
 <script>
-import TestReview from '@/components/TestReview.vue'
+import { mapState } from 'vuex';
+import MovieDetailReview from '@/components/MovieDetailReview.vue'
 import axios from 'axios'
 import ActorListItems from '@/components/ActorListItems.vue'
 import DirectorListItems from '@/components/DirectorListItems.vue'
@@ -191,7 +168,7 @@ export default {
   components:{
     ActorListItems,
     DirectorListItems,
-    TestReview
+    MovieDetailReview
   },
   data(){
     return {
@@ -214,6 +191,7 @@ export default {
     next()
   },
   computed:{
+    ...mapState(['user']),
     youtube_key(){
       return this.y_key
     },
@@ -227,6 +205,10 @@ export default {
     RatingAverage(){
       return this.rating_average
     },
+    IsLiked(){
+      // return true
+      return this.user.movies.some(movie=>movie.id===this.movie.id);
+    }
   },
   methods:{
     getRating(){
@@ -375,6 +357,7 @@ export default {
 </script>
 
 <style scoped>
+
 .my-container-bottom{
   margin-bottom:40px;
 }
@@ -612,6 +595,13 @@ header {
 }
 
 .custom-okxqa8 {
+
+  position: absolute;
+  bottom: 20;
+  left: 20%;
+  transform: translateX(-50%);
+
+
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
@@ -677,6 +667,7 @@ header {
     font-weight: 700;
     letter-spacing: 1px;
     line-height: 26px;
+    margin-bottom: 10px;
 }
 
 .custom-nhnj1n {
@@ -767,6 +758,7 @@ header {
     font-weight: 700;
     letter-spacing: 0px;
     line-height: 26px;
+    margin-bottom: 30px;
 }
 
 .custom-1fbr3zd-ShowMoreButton {
@@ -934,4 +926,27 @@ p {
     margin: 0px 4px 8px 0px;
 }
 
+
+
+.custom-1u6ofa6 {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #2e2f31;
+    color: #fff;
+    font-family: "Watcha Sans",Roboto,"Noto Sans KR","Apple SD Gothic Neo","Nanum Gothic","Malgun Gothic",sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    vertical-align: top;
+    line-height: 18px;
+    height: 20px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin: 0 13px 0 0;
+}
 </style>

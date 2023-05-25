@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="cardtext">
     <td>{{ CARDreview.id }}</td>
     <td
       style="color: black;"
@@ -59,36 +59,27 @@ export default {
 </script>
 
 <style scoped>
-.searchWrap {
-  border: 1px solid #888;
-  border-radius: 5px;
-  text-align: center;
-  padding: 20px 0;
-  margin-bottom: 40px;
-}
+    .searchWrap{border:1px solid #888; border-radius:5px; text-align:center; padding:20px 0; margin-bottom:40px;}
+    .searchWrap input{width:60%; height:36px; border-radius:3px; padding:0 10px; border:1px solid #888;}
+    .searchWrap .btnSearch{display:inline-block; margin-left:10px;}
 
-.searchWrap input {
-  width: 60%;
-  height: 36px;
-  border-radius: 3px;
-  padding: 0 10px;
-  border: 1px solid #888;
-}
+  .table {
+    background: white;
+  }
 
-.searchWrap .btnSearch {
-  display: inline-block;
-  margin-left: 10px;
-}
-
-.table {
-  background: white;
-}
-
-.container {
+  .container {
   padding: 20px;
 }
 
 .noBorder {
-  border: none;
+  border:none;
+}
+
+.cardtext{
+  color: aliceblue;
+}
+
+a {
+  text-decoration: none;
 }
 </style>

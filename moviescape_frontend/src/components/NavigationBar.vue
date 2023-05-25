@@ -9,13 +9,13 @@
         <!-- <a class="navbar-brand" href="/">
           
         </a> -->
-        <router-link :to="{name:'MovieListView'}">MovieListView</router-link>
-        <router-link :to="{name:'GenreListView'}">GLV</router-link>
+        <router-link :to="{name:'MovieListView'}">영화</router-link>
+        <!-- <router-link :to="{name:'GenreListView'}">GLV</router-link> -->
         <router-link to="/RecommendView">Recommendation</router-link>
         <router-link to="/ReviewListView">리뷰</router-link>
-        <router-link to="/ActorListView">액터</router-link>
+        <router-link to="/HumanListView">출연진</router-link>
         <router-link v-if="user" to="/MyDetailView">{{user.username}}</router-link>
-        <a>point : {{user.point}}</a>
+        <a v-if="user">point : {{user.point}}</a>
         <router-link v-show="!isLogin" to="/LoginView">로그인</router-link>
         <button v-show="isLogin" @click="LogOut" class="btn btn-primary">로그아웃</button>
         <img src="http://decoder.kr/wp-content/uploads/2020/03/decoder_smallver.gif" alt="Decoder / 디코더" width="50" height="50" >
