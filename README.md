@@ -44,36 +44,10 @@
   레퍼런스 수집
 
 
-# 화면구성
+# 전체 일정
 
-<라우터>
+<img src="./schedulegant.PNG">
 
-### Home
-HomeView 
-
-### Movie
-MovieDetailView 
-MovieListView 
-GenreListView 
-
-### Human
-HumanListView 
-ActorDetailView 
-DirectorDetailView
-
-### Review
-ReviewListView 
-CreateReviewView 
-ReviewDetailView 
-
-### Recommend
-RecommendView
-
-### Account
-LoginView 
-SignUpView
-UserDetailView 
-MyDetailView
 
 
 
@@ -91,10 +65,6 @@ MyDetailView
 
 전체 리뷰: 특정 영화를 선택해서  커뮤니티 페이지에 영화에 대한 후기뿐 아니라 자유로운 주제로 게시글을 올릴 수 있도록 함
 
-
-# 전체 일정
-
-<img src="./schedulegant.PNG">
 
 
 
@@ -129,6 +99,37 @@ MyDetailView
 -백엔드 모델,url,serializer작성
 -추천알고리즘 만들기
 
+
+# 화면구성
+
+<라우터>
+
+### Home
+HomeView 
+
+### Movie
+MovieDetailView 
+MovieListView 
+GenreListView 
+
+### Human
+HumanListView 
+ActorDetailView 
+DirectorDetailView
+
+### Review
+ReviewListView 
+CreateReviewView 
+ReviewDetailView 
+
+### Recommend
+RecommendView
+
+### Account
+LoginView 
+SignUpView
+UserDetailView 
+MyDetailView
 
 # 프론트엔드 기능 체크리스트
 
