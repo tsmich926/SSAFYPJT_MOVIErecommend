@@ -99,6 +99,7 @@ export default {
       this.$router.push({name:"RandomProfileVue"})
     },
     like_genre(genre_id){
+      //장르 좋아요 취소 추가해야함
       console.log(genre_id)
     }
   },
