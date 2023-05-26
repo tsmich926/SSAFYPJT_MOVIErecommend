@@ -97,7 +97,7 @@ export default {
       if (this.DetailUser.profile_path=='default'){
         return 'http://localhost:8080/user/default.png'
       }else{
-        return this.Detailuser.profile_path
+        return this.DetailUser.profile_path
       }
     },
     genres(){

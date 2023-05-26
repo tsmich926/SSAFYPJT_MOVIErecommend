@@ -15,7 +15,7 @@
     <td>{{ CARDreview.content }}</td>
     <td>{{ CARDreview.movie.title }}</td>
     <td>
-      <a href="#" @click="gotoUserDetail">{{ CARDreview.user.username }}</a>
+      <a href="" @click="gotoUserDetail">{{ CARDreview.user.username }}</a>
     </td>
     <td>{{ formatTime(CARDreview.created_at) }}</td>
   </tr>
