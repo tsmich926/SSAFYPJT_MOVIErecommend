@@ -222,7 +222,7 @@ export default {
   methods:{
 
     getYoutube(){
-      const API_KEY="AIzaSyC1Iaqm0L7oQ3L9sNTmya4FaBTyBg1S_Fg"
+      const API_KEY="YOUTUBE_API_KEY"
       const API_URL="https://www.googleapis.com/youtube/v3/search"
       console.log("영화화화")
       console.log(this.movie.title)
@@ -367,8 +367,7 @@ export default {
         method:'get',
         url:`https://api.themoviedb.org/3/movie/${movie_id}/videos`,
         params: {
-            // api_key: '77347a1bf275c0c7fd3a5066b945c759',
-            api_key: 'b3628728851d758a9fb78c3d38b86613',
+            api_key: 'YOUTUBE_API_KEY',
             language: 'Ko',
           },
 

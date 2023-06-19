@@ -49,7 +49,7 @@ export default {
           mehtod:'get',
           url:'https://api.unsplash.com/search/photos',
           headers: {
-            Authorization:' Client-ID FqbNMPmM9i4RuvkJ9UFw72czSeVHAzq0yGmQs1eri2s' // YOUR_ACCESS_KEY는 Unsplash에서 발급받은 API 키로 대체해야 합니다.
+            Authorization:' Client-ID UNSPLASH_API_KEY' // YOUR_ACCESS_KEY는 Unsplash에서 발급받은 API 키로 대체해야 합니다.
           },
           params: {
             // 필요한 매개변수 설정
